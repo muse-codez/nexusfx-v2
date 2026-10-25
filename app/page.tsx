@@ -79,7 +79,7 @@ export default function Home() {
             scrolled ? "bg-black/80" : "bg-black/60"
           }`}
         >
-          <a href="#top" className="font-balloon text-xl font-extrabold tracking-tight">
+          <a href="#top" className="font-pixelify text-xl font-extrabold tracking-tight">
             NexusFX
           </a>
           <div className="flex items-center gap-1 font-mono text-xs sm:gap-2 sm:text-sm">
@@ -112,7 +112,7 @@ export default function Home() {
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -bottom-2 -left-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -bottom-2 -right-2 h-4 w-4 bg-lime-400" />
-          <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-balloon text-6xl font-extrabold leading-none tracking-tight text-transparent sm:text-8xl">
+          <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-6xl font-extrabold leading-none tracking-tight text-transparent sm:text-8xl">
             NexusFX
           </h1>
           <p className="mt-6 font-minecraft text-sm leading-relaxed text-lime-300 sm:text-base">
@@ -138,8 +138,8 @@ export default function Home() {
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
       <section id="clients" className="px-4 pb-24">
         <div className="mx-auto max-w-3xl rounded-[2.5rem] bg-zinc-900 p-8 ring-1 ring-zinc-300/20 sm:p-12">
-          <h2 className="text-center font-fungky text-2xl leading-relaxed tracking-wide sm:text-3xl">
-            CREATORS
+          <h2 className="text-center font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
+            Creators I&apos;ve worked with
           </h2>
           <div
             className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3"
@@ -183,8 +183,8 @@ export default function Home() {
           <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
             featured work
           </span>
-          <h2 className="mt-6 font-fungky text-2xl leading-relaxed tracking-wide sm:text-3xl">
-            RECENT EDITS
+          <h2 className="mt-6 font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
+            Recent edits
           </h2>
         </div>
         <div className="group/grid mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -215,7 +215,7 @@ export default function Home() {
       <section id="hire" className="px-4 pb-16">
         <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
           <div className="rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
-            <h2 className="font-balloon text-4xl font-bold leading-tight sm:text-6xl">
+            <h2 className="font-pixelify text-4xl font-bold leading-tight sm:text-6xl">
               Let&apos;s build your
               <br />
               next video.

@@ -13,8 +13,7 @@
   --font-sans: ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-minecraft: var(--font-minecraft-font);
-  --font-balloon: var(--font-balloon-dreams);
-  --font-fungky: var(--font-fungky-brow);
+  --font-pixelify: var(--font-pixelify-sans);
 }
 
 @media (prefers-color-scheme: dark) {
