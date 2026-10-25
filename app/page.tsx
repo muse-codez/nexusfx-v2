@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import TextLoop from "@/components/TextLoop";
+import TargetCursor from "@/components/TargetCursor";
 import DotField from "@/components/DotField";
 import IntroLoader from "@/components/IntroLoader";
 
@@ -83,6 +84,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
+      <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn cursorColor="#ffffff" cursorColorOnTarget="#a3e635" />
       {/* Intro loader: black screen, flipping zoom-in logo, then
           fades away to reveal this page rendered underneath. */}
       <IntroLoader />
@@ -110,7 +112,7 @@ export default function Home() {
           removed at the user's request. */}
       <header className="v2-nav-drop fixed inset-x-0 top-0 z-50 flex justify-center px-4 py-4">
         <nav className="flex w-full max-w-3xl items-center justify-between bg-transparent px-2 py-1">
-          <a href="#top" className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
+          <a href="#top" data-cursor-label="Top" className="cursor-target flex items-center gap-2 transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 rounded-full object-cover" />
             <span className="font-pixelify text-xl font-bold text-lime-400">NexusFX</span>
@@ -118,7 +120,8 @@ export default function Home() {
           <div className="flex items-center gap-1 font-pixelify text-xs uppercase sm:gap-2 sm:text-sm">
             <a
               href="#top"
-              className={`rounded-full px-3 py-1 transition-all duration-300 ${
+              data-cursor-label="Home"
+              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "top"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -128,7 +131,8 @@ export default function Home() {
             </a>
             <a
               href="#clients"
-              className={`rounded-full px-3 py-1 transition-all duration-300 ${
+              data-cursor-label="Clients"
+              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "clients"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -138,7 +142,8 @@ export default function Home() {
             </a>
             <a
               href="#videos"
-              className={`rounded-full px-3 py-1 transition-all duration-300 ${
+              data-cursor-label="Videos"
+              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "videos"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -148,7 +153,8 @@ export default function Home() {
             </a>
             <a
               href="#hire"
-              className={`v2-shine-wrap relative overflow-hidden rounded-full px-3 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
+              data-cursor-label="Hire"
+              className={`cursor-target v2-shine-wrap relative overflow-hidden rounded-full px-3 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
                 active === "hire"
                   ? "bg-[#3884ff] shadow-[0_0_18px_rgba(56,132,255,0.6)]"
                   : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600"
@@ -226,12 +232,13 @@ export default function Home() {
                 <a
                   key={client.name}
                   href={client.url}
+                  data-cursor-label={client.name}
                   target="_blank"
                   rel="noreferrer"
                   onMouseEnter={() => setFeaturedClient(index)}
                   onFocus={() => setFeaturedClient(index)}
                   onBlur={() => setFeaturedClient(null)}
-                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 ${
+                  className={`cursor-target relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 ${
                     featured
                       ? "z-10 ring-2 ring-lime-400/80 shadow-[0_0_28px_rgba(163,230,53,0.35)]"
                       : ""
@@ -296,6 +303,7 @@ export default function Home() {
                     type="button"
                     onClick={() => setPlayingId(video.id)}
                     aria-label={`Play ${video.title}`}
+                    data-cursor-label="Play"
                     className="group absolute inset-0 h-full w-full cursor-pointer"
                   >
                     <img
@@ -320,7 +328,8 @@ export default function Home() {
                 href={video.creatorUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 flex items-center gap-2 font-mono text-xs text-white/70 transition hover:text-white"
+                data-cursor-label={video.creator}
+                className="cursor-target mt-2 flex items-center gap-2 font-mono text-xs text-white/70 transition hover:text-white"
               >
                 <img src={video.creatorLogo} alt={video.creator} className="h-5 w-5 rounded-full object-cover" />
                 {video.creator}
@@ -395,18 +404,20 @@ export default function Home() {
               <div className="mt-5 flex gap-2">
                 <a
                   href="mailto:nexusfx.media@gmail.com"
-                  className="rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition hover:bg-lime-300"
+                  data-cursor-label="Email"
+                  className="cursor-target rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition hover:bg-lime-300"
                 >
                   Write an email
                 </a>
                 <button
                   type="button"
+                  data-cursor-label="Copy"
                   onClick={() => {
                     navigator.clipboard?.writeText("nexusfx.media@gmail.com").catch(() => {});
                     setEmailCopied(true);
                     setTimeout(() => setEmailCopied(false), 2000);
                   }}
-                  className="rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
+                  className="cursor-target rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
                 >
                   {emailCopied ? "Copied!" : "Copy address"}
                 </button>
@@ -416,7 +427,8 @@ export default function Home() {
               href="https://www.instagram.com/nexu.fx4"
               target="_blank"
               rel="noreferrer"
-              className="group rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15 transition hover:bg-white/10"
+              data-cursor-label="Instagram"
+              className="cursor-target group rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15 transition hover:bg-white/10"
             >
               <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60">
                 <Instagram size={16} weight="Filled" /> Instagram
