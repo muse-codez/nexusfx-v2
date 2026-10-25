@@ -225,7 +225,7 @@ export default function Home() {
               Recent edits
             </h2>
           </div>
-        <div className="relative mt-10 grid gap-6 sm:grid-cols-2">
+        <div className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {VIDEOS.map((video) => (
             <article key={video.id}>
               <div className="relative aspect-video overflow-hidden rounded-[2rem] bg-black shadow-lg ring-1 ring-zinc-300/40">
