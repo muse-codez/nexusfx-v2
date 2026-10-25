@@ -160,6 +160,27 @@ body {
   animation: v2-write 1.4s steps(7, end) forwards;
 }
 
+/* Wobble on the hero title: a gentle, continuous side-to-side
+   rock (only ±1.5°, so it stays readable), on the title wrapper
+   so the writing reveal and gradient are unaffected. */
+@keyframes v2-wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1.5deg);
+  }
+  75% {
+    transform: rotate(1.5deg);
+  }
+}
+
+.v2-wobble {
+  transform-origin: center;
+  animation: v2-wobble 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
@@ -173,6 +194,9 @@ body {
     animation: none;
   }
   .group:hover .v2-write {
+    animation: none;
+  }
+  .v2-wobble {
     animation: none;
   }
 }

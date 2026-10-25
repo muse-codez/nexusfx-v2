@@ -137,7 +137,7 @@ export default function Home() {
           <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
             NEXUSFX
           </span>
-          <span className="relative inline-block overflow-hidden">
+          <span className="v2-wobble relative inline-block overflow-hidden">
             <h1 className="v2-write v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight text-transparent">
               NexusFX
             </h1>
