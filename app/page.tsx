@@ -112,9 +112,23 @@ export default function Home() {
             shine, muted zinc metal, not glossy. Other sections are
             NOT changed by this. */}
         <div className="relative w-full max-w-5xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 px-6 py-16 text-center shadow-2xl ring-1 ring-zinc-400/30 sm:px-12 sm:py-20">
+          {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
+              this video is notenemyok.com's asset, not NexusFX's.
+              It is hotlinked (not copied into the repo) for preview
+              only, as the user asked, and must be replaced with
+              NexusFX's own hero video before any publish. */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+            src="https://www.notenemyok.com/VIDS/background%20video.mp4"
+          />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/40" />
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-black/30" />
           <span aria-hidden="true" className="absolute left-8 right-8 top-0 h-px bg-white/20" />
-        <div className="group v2-fade-up relative -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
+        <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -bottom-2 -left-2 h-4 w-4 bg-lime-400" />
