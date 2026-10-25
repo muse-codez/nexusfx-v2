@@ -20,9 +20,49 @@ const minecraftFont = localFont({
   weight: "400",
 });
 
+// Metadata copied from v1 (same client, same copy) — title,
+// description, keywords, openGraph and twitter. No metadataBase
+// yet: v2 has no deployed domain confirmed, and inventing one
+// would make social crawlers resolve /og to the wrong site.
+// Add metadataBase pointing at v2's real domain once it deploys.
 export const metadata: Metadata = {
-  title: "NexusFX | Video Editor",
-  description: "NexusFX — video editor for YouTubers and gaming creators.",
+  title: "NexusFX | Video Editor for YouTubers & Gaming Creators",
+  description:
+    "NexusFX edits high-retention YouTube and gaming videos for creators including GamerFleet and I. M. Bixu. View work, services, and hire for your next video.",
+  keywords: [
+    "NexusFX",
+    "Nexus FX",
+    "nexu.fx4",
+    "NexusFX video editor",
+    "video editor for YouTubers",
+    "gaming video editor for hire",
+    "YouTube video editing services",
+    "Minecraft video editor",
+  ],
+  icons: {
+    icon: "/favicon.ico",
+  },
+  openGraph: {
+    type: "website",
+    title: "NexusFX | Video Editor for YouTubers & Gaming Creators",
+    description:
+      "NexusFX edits high-retention YouTube and gaming videos for creators including GamerFleet and I. M. Bixu.",
+    images: [
+      {
+        url: "/og",
+        width: 1200,
+        height: 630,
+        alt: "NexusFX — Video Editor for YouTubers & Gaming Creators",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NexusFX | Video Editor for YouTubers & Gaming Creators",
+    description:
+      "NexusFX edits high-retention YouTube and gaming videos for creators including GamerFleet and I. M. Bixu.",
+    images: ["/og"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
