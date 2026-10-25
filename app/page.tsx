@@ -88,16 +88,19 @@ export default function Home() {
           intro
         />
       </div>
+      {/* Navbar width: old centred pill was max-w-2xl, which was
+          good; this is slightly longer at max-w-3xl, same width in
+          both states so it does not jump when scrolling. */}
       <header
-        className={`fixed z-50 transition-all duration-500 ease-out ${
-          scrolled ? "inset-x-4 top-4" : "inset-x-0 top-0 px-6 py-4"
+        className={`fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ease-out ${
+          scrolled ? "top-4 px-4" : "top-0 px-4 py-4"
         }`}
       >
         <nav
-          className={`flex w-full items-center justify-between transition-all duration-500 ${
+          className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
             scrolled
               ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-xl"
-              : "bg-transparent px-0 py-1"
+              : "bg-transparent px-2 py-1"
           }`}
         >
           <a href="#top" className="font-pixelify text-xl font-extrabold tracking-tight">
