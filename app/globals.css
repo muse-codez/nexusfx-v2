@@ -272,18 +272,16 @@ body {
   .v2-wipe { transition: none; }
 }
 
-/* Soft clay title: the title sits ON a puffy pastel plaque instead
-   of being flat coloured text. That is what makes clay look soft:
-   a pastel surface, a big round radius, an inset highlight on the
-   top-left, an inset shade on the bottom-right, and one large soft
-   drop shadow underneath — no gradient, no glow, no shine. */
-.v2-clay-title {
-  background: #fdf3dc;
-  color: #2e2a3f;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-  box-shadow:
-    0 16px 28px rgba(0, 0, 0, 0.35),
-    inset 3px 3px 8px rgba(255, 255, 255, 0.9),
-    inset -4px -4px 10px rgba(190, 170, 130, 0.45);
+/* Soft blue title: the softness lives IN the letters, not in a
+   background plaque (the cream plaque is removed). Pixel letters
+   in blue, light on top fading to deeper blue at the bottom, like
+   inflated glossy letters, with one soft drop shadow following the
+   letter shapes. Similar in feel to a glossy blue balloon render,
+   built in plain CSS — not a copy of any image. */
+.v2-soft-blue-title {
+  background: linear-gradient(to bottom, #8ec2ff 0%, #3b82f6 55%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.35));
 }

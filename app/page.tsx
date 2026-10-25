@@ -191,7 +191,7 @@ export default function Home() {
             NEXUSFX
           </span>
           <span className="v2-wobble relative inline-block px-2 py-4">
-            <h1 className="v2-write v2-clay-title px-8 py-3 font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
+            <h1 className="v2-write v2-soft-blue-title font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
               NexusFX
             </h1>
           </span>
@@ -213,7 +213,7 @@ export default function Home() {
           <span aria-hidden="true" className="absolute bottom-3 left-4 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 right-4 text-sm text-white/30">✦</span>
           <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
-            <span className="v2-clay-title inline-block px-8 py-3">Creators I&apos;ve worked with</span>
+            <span className="v2-soft-blue-title">Creators I&apos;ve worked with</span>
           </h2>
           <div
             className="relative mx-auto mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:w-[46%] lg:grid-cols-3"
@@ -275,7 +275,7 @@ export default function Home() {
               featured work
             </span>
             <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
-              <span className="v2-clay-title inline-block px-8 py-3">Recent edits</span>
+              <span className="v2-soft-blue-title">Recent edits</span>
             </h2>
           </div>
         <div className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -374,7 +374,7 @@ export default function Home() {
               <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -right-2 h-3 w-3 bg-black" />
               <h2 className="font-pixelify text-6xl font-extrabold leading-tight sm:text-8xl">
-                <span className="v2-clay-title inline-block px-10 py-6">
+                <span className="v2-soft-blue-title">
                   Let&apos;s build your
                   <br />
                   next video.
