@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Play } from "reicon-react";
+import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
+import TextLoop from "@/components/TextLoop";
 import DotField from "@/components/DotField";
 import IntroLoader from "@/components/IntroLoader";
 
@@ -49,6 +50,7 @@ export default function Home() {
   // features a tile, and leaving it clears the feature again.
   const [featuredClient, setFeaturedClient] = useState<number | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
 
   // Navbar, two states like the reference screenshots:
   // - Without scroll: flat, no pill container, just brand + links
@@ -334,8 +336,96 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Site footer line only — the hire card itself is removed
-          for now, to be rebuilt as the user directs next. */}
+      {/* Hire — rebuilt, NOT the old card: a TextLoop wave ribbon
+          (with a crossing second band + scroll boost) plus a
+          pulsing availability badge, and contact as two large
+          tiles instead of the old pill row. */}
+      <section id="hire" className="relative z-10 px-4 pb-24">
+        <div className="mx-auto max-w-5xl text-center">
+          {/* Fancy extra 1: live availability badge with a pulsing dot */}
+          <p className="mx-auto flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-lime-300 ring-1 ring-lime-400/40">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-400" />
+            </span>
+            Available for new projects
+          </p>
+          <TextLoop
+            text="HIRE ME"
+            shape="wave"
+            speed={90}
+            direction="forward"
+            separator="✦"
+            curviness={90}
+            tilt={0}
+            fontSize={46}
+            fontWeight={800}
+            letterSpacing={2}
+            uppercase
+            ribbon
+            ribbonColor="#a3e635"
+            color="#000000"
+            ribbonWidth={86}
+            edgeFade={0.5}
+            cross
+            crossAngle={16}
+            scrollBoost={0.6}
+            pauseOnHover
+            className="mt-4"
+            style={{ fontFamily: "var(--font-pixelify), monospace" }}
+          />
+          <p className="mt-2 font-mono text-xs text-white/50">
+            Scroll — the loop speeds up. Hover it — it eases to a stop.
+          </p>
+          <p className="mx-auto mt-6 max-w-xl text-white/80">
+            Got a video that needs to hit different? Send the idea, and NexusFX cuts it into something people actually finish.
+          </p>
+          {/* Contact, as two large tiles — not the old pill row */}
+          <div className="mt-10 grid gap-4 text-left sm:grid-cols-2">
+            <div className="rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15">
+              <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60">
+                <Envelope size={16} weight="Filled" /> Email
+              </p>
+              <p className="mt-3 break-all font-pixelify text-lg text-white">nexusfx.media@gmail.com</p>
+              <div className="mt-5 flex gap-2">
+                <a
+                  href="mailto:nexusfx.media@gmail.com"
+                  className="rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition hover:bg-lime-300"
+                >
+                  Write an email
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard?.writeText("nexusfx.media@gmail.com").catch(() => {});
+                    setEmailCopied(true);
+                    setTimeout(() => setEmailCopied(false), 2000);
+                  }}
+                  className="rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
+                >
+                  {emailCopied ? "Copied!" : "Copy address"}
+                </button>
+              </div>
+            </div>
+            <a
+              href="https://www.instagram.com/nexu.fx4"
+              target="_blank"
+              rel="noreferrer"
+              className="group rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15 transition hover:bg-white/10"
+            >
+              <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60">
+                <Instagram size={16} weight="Filled" /> Instagram
+              </p>
+              <p className="mt-3 font-pixelify text-lg text-white">@nexu.fx4</p>
+              <p className="mt-5 flex items-center gap-1 text-sm font-semibold text-pink-400">
+                Visit profile <ArrowUpRight size={16} weight="Filled" />
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Site footer */}
       <footer className="relative z-10 px-4 pb-16">
         <p className="text-center font-mono text-xs text-white/40">
           © 2026 NexusFX
