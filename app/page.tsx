@@ -54,7 +54,6 @@ export default function Home() {
   // - After scroll: the same bar becomes a dark rounded pill
   //   container (blur + shadow + ring).
   // This replaces the earlier "hidden on hero" rule.
-  const [scrolled, setScrolled] = useState(false);
   // Scroll-spy: blue pill = the section actually on screen.
   // Previously home was hardcoded blue, so scrolling never
   // changed the navbar. Now the active section is recomputed
@@ -65,7 +64,6 @@ export default function Home() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 100);
       let current = "top";
       for (const id of ["top", "clients", "videos", "hire"]) {
         const el = document.getElementById(id);
@@ -101,18 +99,12 @@ export default function Home() {
       {/* Navbar width: old centred pill was max-w-2xl, which was
           good; this is slightly longer at max-w-3xl, same width in
           both states so it does not jump when scrolling. */}
-      <header
-        className={`v2-nav-drop fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ease-out ${
-          scrolled ? "top-4 px-4" : "top-0 px-4 py-4"
-        }`}
-      >
-        <nav
-          className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
-            scrolled
-              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-xl"
-              : "bg-transparent px-2 py-1"
-          }`}
-        >
+      {/* Navbar, always without background: the flat version
+          (no pill container, no blur, no ring, no shadow) at
+          all scroll positions. The scroll pill background was
+          removed at the user's request. */}
+      <header className="v2-nav-drop fixed inset-x-0 top-0 z-50 flex justify-center px-4 py-4">
+        <nav className="flex w-full max-w-3xl items-center justify-between bg-transparent px-2 py-1">
           <a href="#top" className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 rounded-full object-cover" />
