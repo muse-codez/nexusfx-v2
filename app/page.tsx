@@ -40,32 +40,10 @@ const VIDEOS = [
   { id: "HsMemCsMGyc", title: "I Tried Every Celebrity Experience!", creator: "Ayush Bhandari", creatorUrl: "https://www.youtube.com/@AyushBhandari", creatorLogo: "/creators/ayushbhandari.jpg" },
 ] as const;
 
-const HIRE_SPARKLES = [
-  { dx: -140, dy: -110, size: 12, color: "#000000", round: false },
-  { dx: -90, dy: -150, size: 8, color: "#f7078e", round: true },
-  { dx: 0, dy: -170, size: 14, color: "#ffffff", round: false },
-  { dx: 90, dy: -150, size: 8, color: "#000000", round: true },
-  { dx: 140, dy: -110, size: 12, color: "#a855f7", round: false },
-  { dx: 170, dy: -40, size: 10, color: "#f7078e", round: false },
-  { dx: 170, dy: 40, size: 8, color: "#ffffff", round: true },
-  { dx: 140, dy: 110, size: 12, color: "#000000", round: false },
-  { dx: 90, dy: 150, size: 8, color: "#a855f7", round: true },
-  { dx: 0, dy: 170, size: 14, color: "#f7078e", round: false },
-  { dx: -90, dy: 150, size: 8, color: "#ffffff", round: true },
-  { dx: -140, dy: 110, size: 12, color: "#a855f7", round: false },
-  { dx: -170, dy: 40, size: 10, color: "#000000", round: true },
-  { dx: -170, dy: -40, size: 8, color: "#f7078e", round: false },
-] as const;
-
 export default function Home() {
   // Featured client tile: first tile at rest, transfers to the tile
   // under the cursor on hover, and returns when the cursor leaves.
   const [featuredClient, setFeaturedClient] = useState(0);
-  // Hire hover effect: true while the mouse is over the hire
-  // card. Correction from the user: the reference fire shows
-  // on hover, not on click — so this is hover-driven, and it
-  // loops while hovered instead of firing once on click.
-  const [hireHover, setHireHover] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   // Navbar, two states like the reference screenshots:
@@ -346,11 +324,7 @@ export default function Home() {
 
       {/* Hire — closing panel */}
       <section id="hire" className="relative z-10 px-4 pb-16">
-        <div
-          onMouseEnter={() => setHireHover(true)}
-          onMouseLeave={() => setHireHover(false)}
-          className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4"
-        >
+        <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
           <div className="flex items-center justify-between px-4 py-3 font-mono text-xs text-black/70">
             <span className="font-bold text-black">NexusFX — Video Editor</span>
             <a
@@ -378,30 +352,6 @@ export default function Home() {
             >
               Hire me <ArrowUpRight size={18} weight="Filled" />
             </a>
-            {hireHover ? (
-              <div aria-hidden="true" className="v2-hire-burst pointer-events-none absolute inset-0 z-20">
-                <div className="v2-hire-glow-loop absolute inset-0 rounded-[1.5rem] ring-4 ring-[#f7078e]" />
-                {HIRE_SPARKLES.map((s, i) => (
-                  <span
-                    key={i}
-                    className="v2-spark-burst-loop absolute"
-                    style={
-                      {
-                        left: "50%",
-                        top: "72%",
-                        width: s.size,
-                        height: s.size,
-                        backgroundColor: s.color,
-                        borderRadius: s.round ? "50%" : 2,
-                        animationDelay: `${i * 0.06}s`,
-                        "--dx": `${s.dx}px`,
-                        "--dy": `${s.dy}px`,
-                      } as React.CSSProperties
-                    }
-                  />
-                ))}
-              </div>
-            ) : null}
           </div>
           <div className="flex flex-col items-center justify-between gap-4 px-4 py-5 text-black sm:flex-row">
             <a

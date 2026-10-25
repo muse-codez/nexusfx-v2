@@ -202,67 +202,13 @@ body {
 }
 
 
-/* Hire card click burst: geometric sparkles, NOT fire — no flames,
-   no orange/red fire shapes. Particles fly out from the button
-   and fade, while a pink glow pulses once over the lime panel. */
-@keyframes v2-spark-burst {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(180deg);
-    opacity: 0;
-  }
-}
-
-.v2-spark-burst {
-  animation: v2-spark-burst 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes v2-hire-glow {
-  0% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.v2-hire-glow {
-  animation: v2-hire-glow 0.9s ease-out forwards;
-}
-
-
-/* Hover version: same sparkles, but looping while the card is
-   hovered (like the reference fire, which shows on hover, not
-   on click) — particles fly out, fade, and repeat. */
-.v2-spark-burst-loop {
-  animation: v2-spark-burst 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-
-@keyframes v2-hire-glow-loop {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.v2-hire-glow-loop {
-  animation: v2-hire-glow-loop 1.2s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
   .v2-glow-pulse,
   .v2-gradient-text,
   .v2-bounce-soft,
-  .v2-intro-flip,
-  .v2-hire-burst {
+  .v2-intro-flip {
     animation: none;
   }
   .group:hover .v2-shine-beam,
@@ -274,8 +220,5 @@ body {
   }
   .v2-wobble {
     animation: none;
-  }
-  .v2-hire-burst {
-    display: none;
   }
 }
