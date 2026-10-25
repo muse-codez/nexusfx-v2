@@ -191,10 +191,9 @@ export default function Home() {
             NEXUSFX
           </span>
           <span className="v2-wobble relative inline-block overflow-hidden">
-            <h1 className="v2-write v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight text-transparent">
+            <h1 className="v2-write font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight text-[#efe9dc]">
               NexusFX
             </h1>
-            <span aria-hidden="true" className="v2-shine-beam" />
           </span>
           <p className="mt-6 font-minecraft text-sm leading-relaxed text-lime-300 sm:text-base">
             edits that hold attention
@@ -213,7 +212,7 @@ export default function Home() {
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 left-4 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 right-4 text-sm text-white/30">✦</span>
-          <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
+          <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide text-[#efe9dc] sm:text-7xl">
             Creators I&apos;ve worked with
           </h2>
           <div
@@ -275,7 +274,7 @@ export default function Home() {
             <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
               featured work
             </span>
-            <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
+            <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide text-[#efe9dc] sm:text-7xl">
               Recent edits
             </h2>
           </div>
@@ -374,7 +373,7 @@ export default function Home() {
               <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -right-2 h-3 w-3 bg-black" />
-              <h2 className="font-pixelify text-6xl font-extrabold leading-tight sm:text-8xl">
+              <h2 className="font-pixelify text-6xl font-extrabold leading-tight text-[#2e2b26] sm:text-8xl">
                 Let&apos;s build your
                 <br />
                 next video.
