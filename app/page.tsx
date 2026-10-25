@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import TextLoop from "@/components/TextLoop";
 import TargetCursor from "@/components/TargetCursor";
 import DotField from "@/components/DotField";
 import IntroLoader from "@/components/IntroLoader";
+import { Folder } from "@/components/ui/folder-component";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -102,6 +103,39 @@ export default function Home() {
   const [featuredClient, setFeaturedClient] = useState<number | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [emailCopied, setEmailCopied] = useState(false);
+  // Showcase folder (Rare UI Folder, adapted): videos start inside
+  // the folder. Clicking it — or scrolling it into view — lifts the
+  // flap, then the folder disappears and the video grid spreads
+  // into place. One-way per page load: once open, the grid stays.
+  const [folderOpen, setFolderOpen] = useState(false);
+  const [showcaseOpen, setShowcaseOpen] = useState(false);
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const handleFolderClick = () => {
+    if (showcaseOpen || folderOpen) return;
+    setFolderOpen(true);
+    setTimeout(() => setShowcaseOpen(true), 750);
+  };
+  useEffect(() => {
+    if (showcaseOpen || !showcaseRef.current) return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          timer = setTimeout(() => {
+            setFolderOpen(true);
+            setTimeout(() => setShowcaseOpen(true), 750);
+          }, 900);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(showcaseRef.current);
+    return () => {
+      observer.disconnect();
+      if (timer) clearTimeout(timer);
+    };
+  }, [showcaseOpen]);
   const copyLabelRef = useRef<HTMLSpanElement>(null);
 
   // Drive the Copy button label through the text morph: on mount
@@ -377,9 +411,37 @@ export default function Home() {
               <span className="v2-clay-title inline-block px-8 py-3">Recent edits</span>
             </h2>
           </div>
-        <div className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {VIDEOS.map((video) => (
-            <article key={video.id}>
+        <div ref={showcaseRef} className="relative mt-10">
+          <AnimatePresence mode="wait">
+            {!showcaseOpen ? (
+              <motion.div
+                key="folder"
+                exit={{ opacity: 0, scale: 0.9, y: -30 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="flex flex-col items-center"
+              >
+                <div className="scale-[0.85] sm:scale-100">
+                  <Folder color="blue" size="md" open={folderOpen} onToggle={handleFolderClick} />
+                </div>
+                <p className="mt-2 font-mono text-xs text-white/60">
+                  6 videos inside — click the folder, or just scroll, it opens on its own
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="grid"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+              >
+          {VIDEOS.map((video, index) => (
+            <motion.article
+              key={video.id}
+              initial={{ opacity: 0, y: 60, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: "spring", stiffness: 80, damping: 20, delay: index * 0.08 }}
+            >
               <div className="relative aspect-video overflow-hidden rounded-[2rem] bg-black shadow-lg ring-1 ring-zinc-300/40">
                 {playingId === video.id ? (
                   <iframe
@@ -425,8 +487,11 @@ export default function Home() {
                 <img src={video.creatorLogo} alt={video.creator} className="h-5 w-5 rounded-full object-cover" />
                 {video.creator}
               </a>
-            </article>
+            </motion.article>
           ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
           <div className="relative mt-10 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] text-white/50">
             <span>CLIENTS · 06</span>
