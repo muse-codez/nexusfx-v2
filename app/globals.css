@@ -285,3 +285,17 @@ body {
   color: transparent;
   filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.35));
 }
+
+/* Cream clay plaque — used ONLY on the Creators and Recent edits
+   titles, as the user specified. Hero and Hire titles do NOT use
+   this; they use .v2-soft-blue-title instead. */
+.v2-clay-title {
+  background: #fdf3dc;
+  color: #2e2a3f;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.35),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.9),
+    inset -4px -4px 10px rgba(190, 170, 130, 0.45);
+}
