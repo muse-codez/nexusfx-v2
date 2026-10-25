@@ -53,10 +53,23 @@ export default function Home() {
   //   container (blur + shadow + ring).
   // This replaces the earlier "hidden on hero" rule.
   const [scrolled, setScrolled] = useState(false);
+  // Scroll-spy: blue pill = the section actually on screen.
+  // Previously home was hardcoded blue, so scrolling never
+  // changed the navbar. Now the active section is recomputed
+  // on every scroll: the last section whose top has passed
+  // 150px from the viewport top (navbar height + margin).
+  // Order matters because #videos sits inside #clients.
+  const [active, setActive] = useState("top");
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 100);
+      let current = "top";
+      for (const id of ["top", "clients", "videos", "hire"]) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 150) current = id;
+      }
+      setActive(current);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -99,18 +112,43 @@ export default function Home() {
             NexusFX
           </a>
           <div className="flex items-center gap-1 font-mono text-xs sm:gap-2 sm:text-sm">
-            <a href="#top" className="rounded bg-[#3884ff] px-3 py-1 font-semibold text-white transition hover:bg-[#4a90ff]">
+            <a
+              href="#top"
+              className={`rounded px-3 py-1 transition ${
+                active === "top"
+                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
               home
             </a>
-            <a href="#clients" className="rounded-full px-3 py-1 text-white transition hover:bg-white/10">
+            <a
+              href="#clients"
+              className={`rounded px-3 py-1 transition ${
+                active === "clients"
+                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
               clients
             </a>
-            <a href="#videos" className="rounded-full px-3 py-1 text-white transition hover:bg-white/10">
+            <a
+              href="#videos"
+              className={`rounded px-3 py-1 transition ${
+                active === "videos"
+                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
               videos
             </a>
             <a
               href="#hire"
-              className="v2-shine-wrap relative overflow-hidden rounded bg-[#5b1a3a] px-3 py-1 font-semibold text-white ring-1 ring-pink-500/60 transition hover:bg-pink-600"
+              className={`v2-shine-wrap relative overflow-hidden rounded px-3 py-1 font-semibold text-white transition ${
+                active === "hire"
+                  ? "bg-[#3884ff] hover:bg-[#4a90ff]"
+                  : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600"
+              }`}
             >
               hire <span aria-hidden="true" className="v2-shine-beam" />
             </a>
