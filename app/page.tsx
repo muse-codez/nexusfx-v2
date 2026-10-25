@@ -61,9 +61,11 @@ export default function Home() {
   // Featured client tile: first tile at rest, transfers to the tile
   // under the cursor on hover, and returns when the cursor leaves.
   const [featuredClient, setFeaturedClient] = useState(0);
-  // Hire click burst: increments on every Hire me click, used as
-  // the burst key so the animation replays each time.
-  const [hireBurst, setHireBurst] = useState(0);
+  // Hire hover effect: true while the mouse is over the hire
+  // card. Correction from the user: the reference fire shows
+  // on hover, not on click — so this is hover-driven, and it
+  // loops while hovered instead of firing once on click.
+  const [hireHover, setHireHover] = useState(false);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   // Navbar, two states like the reference screenshots:
@@ -344,7 +346,11 @@ export default function Home() {
 
       {/* Hire — closing panel */}
       <section id="hire" className="relative z-10 px-4 pb-16">
-        <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
+        <div
+          onMouseEnter={() => setHireHover(true)}
+          onMouseLeave={() => setHireHover(false)}
+          className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4"
+        >
           <div className="flex items-center justify-between px-4 py-3 font-mono text-xs text-black/70">
             <span className="font-bold text-black">NexusFX — Video Editor</span>
             <a
@@ -368,18 +374,17 @@ export default function Home() {
             </div>
             <a
               href="mailto:nexusfx.media@gmail.com"
-              onClick={() => setHireBurst((b) => b + 1)}
               className="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 hover:bg-pink-500 hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
             >
               Hire me <ArrowUpRight size={18} weight="Filled" />
             </a>
-            {hireBurst > 0 ? (
-              <div key={hireBurst} aria-hidden="true" className="v2-hire-burst pointer-events-none absolute inset-0 z-20">
-                <div className="v2-hire-glow absolute inset-0 rounded-[1.5rem] ring-4 ring-[#f7078e]" />
+            {hireHover ? (
+              <div aria-hidden="true" className="v2-hire-burst pointer-events-none absolute inset-0 z-20">
+                <div className="v2-hire-glow-loop absolute inset-0 rounded-[1.5rem] ring-4 ring-[#f7078e]" />
                 {HIRE_SPARKLES.map((s, i) => (
                   <span
                     key={i}
-                    className="v2-spark-burst absolute"
+                    className="v2-spark-burst-loop absolute"
                     style={
                       {
                         left: "50%",
@@ -388,7 +393,7 @@ export default function Home() {
                         height: s.size,
                         backgroundColor: s.color,
                         borderRadius: s.round ? "50%" : 2,
-                        animationDelay: `${i * 0.02}s`,
+                        animationDelay: `${i * 0.06}s`,
                         "--dx": `${s.dx}px`,
                         "--dy": `${s.dy}px`,
                       } as React.CSSProperties
