@@ -279,9 +279,6 @@ export default function Home() {
           {/* Recent edits — v1 showcase, inside the same metal card,
               which now expands to the end of the showcase. */}
           <div id="videos" className="relative mt-16 scroll-mt-24 text-center">
-            <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
-              featured work
-            </span>
             <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
               <span className="v2-clay-title inline-block px-8 py-3">Recent edits</span>
             </h2>
@@ -350,16 +347,6 @@ export default function Home() {
           pulsing availability badge, and contact as two large
           tiles instead of the old pill row. */}
       <section id="hire" className="relative z-10 pb-24">
-        <div className="mx-auto max-w-5xl px-4 text-center">
-          {/* Fancy extra 1: live availability badge with a pulsing dot */}
-          <p className="mx-auto flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-lime-300 ring-1 ring-lime-400/40">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-400" />
-            </span>
-            Available for new projects
-          </p>
-        </div>
         {/* Edge-to-edge loop: full viewport width, no container. */}
         <div className="w-full">
           <TextLoop
