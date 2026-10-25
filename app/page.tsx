@@ -178,7 +178,7 @@ export default function Home() {
             Creators I&apos;ve worked with
           </h2>
           <div
-            className="relative mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+            className="relative mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:w-[52%] lg:grid-cols-3"
             onMouseLeave={() => setFeaturedClient(0)}
           >
             {CLIENTS.map((client, index) => {
