@@ -107,7 +107,7 @@ export default function Home() {
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
       <section id="clients" className="px-4 pb-24">
-        <div className="mx-auto max-w-3xl rounded-[2rem] bg-zinc-900 p-8 sm:p-12">
+        <div className="mx-auto max-w-3xl rounded-[2.5rem] bg-zinc-900 p-8 ring-1 ring-zinc-300/20 sm:p-12">
           <h2 className="text-center font-fungky text-2xl leading-relaxed tracking-wide sm:text-3xl">
             CREATORS
           </h2>
@@ -121,13 +121,15 @@ export default function Home() {
                 <div
                   key={client.name}
                   onMouseEnter={() => setFeaturedClient(index)}
-                  className={`relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br ${client.gradient} shadow-lg transition-all duration-300 ${
+                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-gradient-to-br ${client.gradient} shadow-lg ring-1 ring-zinc-300/40 transition-all duration-300 ${
                     featured
                       ? "z-10 scale-110 ring-2 ring-white/80 shadow-2xl"
                       : "scale-100"
                   }`}
                 >
-                  <span className="flex h-full w-full items-center justify-center text-4xl font-black">
+                  {/* Metal shine: bright top-left sweep over the tile */}
+                  <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
+                  <span className="relative flex h-full w-full items-center justify-center text-4xl font-black">
                     {client.initial}
                   </span>
                   {/* Name pill: only on the featured tile, bottom centre */}
@@ -162,8 +164,10 @@ export default function Home() {
               className="group transition duration-300 group-hover/grid:opacity-40 hover:opacity-100"
             >
               <div
-                className={`relative aspect-video overflow-hidden rounded-2xl bg-gradient-to-br ${video.gradient} shadow-lg transition duration-300 group-hover:scale-[1.03] group-hover:brightness-110 group-hover:shadow-2xl`}
+                className={`relative aspect-video overflow-hidden rounded-[2rem] bg-gradient-to-br ${video.gradient} shadow-lg ring-1 ring-zinc-300/40 transition duration-300 group-hover:scale-[1.03] group-hover:brightness-110 group-hover:shadow-2xl`}
               >
+                {/* Metal shine: bright top-left sweep over the card */}
+                <span className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
                 {/* Title appears only on hover, bottom-left inside the card */}
                 <span className="absolute bottom-3 left-3 max-w-[70%] rounded-full bg-black/70 px-3 py-1 text-left font-mono text-[11px] leading-snug text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {video.title}
@@ -179,7 +183,7 @@ export default function Home() {
 
       {/* Hire — closing panel */}
       <section id="hire" className="px-4 pb-16">
-        <div className="v2-float mx-auto max-w-3xl rounded-[2rem] bg-zinc-200 p-3 sm:p-4">
+        <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
           <div className="rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
             <h2 className="font-balloon text-4xl font-bold leading-tight sm:text-6xl">
               Let&apos;s build your

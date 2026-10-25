@@ -8,11 +8,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-minecraft: var(--font-minecraft);
-  --font-balloon: var(--font-balloon);
-  --font-fungky: var(--font-fungky);
+  /* No Geist: body uses a plain system stack, custom fonts below
+     are the only display fonts on the site. */
+  --font-sans: ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-minecraft: var(--font-minecraft-font);
+  --font-balloon: var(--font-balloon-dreams);
+  --font-fungky: var(--font-fungky-brow);
 }
 
 @media (prefers-color-scheme: dark) {
