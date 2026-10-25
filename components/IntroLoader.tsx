@@ -19,7 +19,14 @@ export default function IntroLoader() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const slideTimer = window.setTimeout(() => setSliding(true), 1400);
-    const doneTimer = window.setTimeout(() => setDone(true), 2200);
+    // Restore scroll here, not only in cleanup: this component
+    // stays mounted and just returns null when done, so cleanup
+    // (which runs only on unmount) never fired — leaving
+    // body overflow hidden forever and breaking all scrolling.
+    const doneTimer = window.setTimeout(() => {
+      document.body.style.overflow = previousOverflow;
+      setDone(true);
+    }, 2200);
     return () => {
       window.clearTimeout(slideTimer);
       window.clearTimeout(doneTimer);
