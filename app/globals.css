@@ -183,22 +183,30 @@ body {
 
 
 /* Intro loader: logo flips (rotateY) while zooming in. */
+/* Intro loader, fixed: flip completes first, then the zoom
+   goes all the way to 2x and holds there. Previously the final
+   scale was only 1.15 and the fade started the instant the
+   animation ended, so the zoom never looked complete. */
 @keyframes v2-intro-flip-zoom {
   0% {
     transform: rotateY(0deg) scale(0.3);
     opacity: 0;
   }
-  40% {
+  25% {
+    opacity: 1;
+  }
+  60% {
+    transform: rotateY(360deg) scale(1.2);
     opacity: 1;
   }
   100% {
-    transform: rotateY(360deg) scale(1.15);
+    transform: rotateY(360deg) scale(2);
     opacity: 1;
   }
 }
 
 .v2-intro-flip-zoom {
-  animation: v2-intro-flip-zoom 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: v2-intro-flip-zoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-style: preserve-3d;
 }
 
