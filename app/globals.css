@@ -279,3 +279,72 @@ body {
     inset 3px 3px 8px rgba(255, 255, 255, 0.9),
     inset -4px -4px 10px rgba(190, 170, 130, 0.45);
 }
+
+/* transitions-dev — text morph (33-text-morph.md, snippet verbatim).
+   Used on the hire email Copy button: "Copy address" -> "Copied!"
+   keeps the shared "Cop" letters in place, only the changing part
+   cross-blurs while its width eases. */
+:root {
+  --text-morph-dur: 180ms;
+  --text-morph-resize-dur: 240ms;
+  --text-morph-blur: 2px;
+  --text-morph-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.t-morph {
+  white-space: nowrap;
+}
+.t-morph-swap {
+  display: inline-grid;
+  vertical-align: bottom;
+  justify-items: start;
+  transition: width var(--text-morph-resize-dur) var(--text-morph-ease);
+}
+.t-morph-swap > span {
+  grid-area: 1 / 1;
+  white-space: pre;
+  transition:
+    opacity var(--text-morph-dur) var(--text-morph-ease),
+    filter  var(--text-morph-dur) var(--text-morph-ease);
+}
+.t-morph-new {
+  opacity: 0;
+  filter: blur(var(--text-morph-blur));
+}
+.t-morph-swap.is-morphing .t-morph-old {
+  opacity: 0;
+  filter: blur(var(--text-morph-blur));
+}
+.t-morph-swap.is-morphing .t-morph-new {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* transitions-dev — video reveal, adapted from the skeleton reveal
+   content-reveal phase (14-skeleton-reveal.md): when a showcase
+   video swaps from thumbnail to iframe, the iframe fades in with a
+   soft cross-blur instead of appearing instantly. The thumbnail
+   itself is the placeholder, so there is no skeleton pulse phase. */
+:root {
+  --reveal-dur: 400ms;
+  --reveal-blur: 2px;
+  --reveal-ease: ease-in-out;
+}
+@keyframes v2-video-reveal {
+  from {
+    opacity: 0;
+    filter: blur(var(--reveal-blur));
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.v2-video-reveal {
+  animation: v2-video-reveal var(--reveal-dur) var(--reveal-ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-morph-swap,
+  .t-morph-swap > span { transition: none !important; }
+  .v2-video-reveal { animation: none; }
+}

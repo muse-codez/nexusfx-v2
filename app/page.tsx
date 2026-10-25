@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import TextLoop from "@/components/TextLoop";
 import TargetCursor from "@/components/TargetCursor";
@@ -45,6 +45,55 @@ const VIDEOS = [
   { id: "HsMemCsMGyc", title: "I Tried Every Celebrity Experience!", creator: "Ayush Bhandari", creatorUrl: "https://www.youtube.com/@AyushBhandari", creatorLogo: "/creators/ayushbhandari.jpg" },
 ] as const;
 
+
+// transitions-dev text morph (33-text-morph.md, JS orchestration
+// adapted to React + TypeScript). The label span in JSX keeps a
+// constant "Copy address" child, so React never overwrites the
+// morph DOM; the effect below drives the text instead.
+type MorphEl = HTMLElement & { _morphTimer?: ReturnType<typeof setTimeout> };
+function morphText(el: MorphEl, next: string) {
+  const prev = el.dataset.text ?? el.textContent ?? "";
+  if (prev === next) return;
+  el.dataset.text = next;
+  if (el._morphTimer) clearTimeout(el._morphTimer);
+  const root = document.documentElement;
+  const ms = (name: string) =>
+    parseFloat(getComputedStyle(root).getPropertyValue(name)) || 0;
+
+  let a = 0;
+  while (a < prev.length && a < next.length && prev[a] === next[a]) a++;
+  let b = 0;
+  while (
+    b < prev.length - a &&
+    b < next.length - a &&
+    prev[prev.length - 1 - b] === next[next.length - 1 - b]
+  )
+    b++;
+
+  const swap = document.createElement("span");
+  swap.className = "t-morph-swap";
+  const out = document.createElement("span");
+  out.className = "t-morph-old";
+  out.setAttribute("aria-hidden", "true");
+  out.textContent = prev.slice(a, prev.length - b);
+  const inn = document.createElement("span");
+  inn.className = "t-morph-new";
+  inn.textContent = next.slice(a, next.length - b);
+  swap.append(out, inn);
+
+  el.textContent = "";
+  el.append(next.slice(0, a), swap, next.slice(next.length - b));
+
+  swap.style.width = out.getBoundingClientRect().width + "px";
+  void swap.offsetWidth; // force reflow so the width transitions
+  swap.classList.add("is-morphing");
+  swap.style.width = inn.getBoundingClientRect().width + "px";
+
+  el._morphTimer = setTimeout(() => {
+    el.textContent = next;
+  }, Math.max(ms("--text-morph-dur"), ms("--text-morph-resize-dur")) + 40);
+}
+
 export default function Home() {
   // Featured client tile: NO tile is featured at rest, so all six
   // tiles sit in exactly the same state. Hover (or keyboard focus)
@@ -52,6 +101,16 @@ export default function Home() {
   const [featuredClient, setFeaturedClient] = useState<number | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
   const [emailCopied, setEmailCopied] = useState(false);
+  const copyLabelRef = useRef<HTMLSpanElement>(null);
+
+  // Drive the Copy button label through the text morph: on mount
+  // this is a no-op (label already "Copy address"), on copy it
+  // morphs to "Copied!", and on the 2s revert it morphs back.
+  useEffect(() => {
+    if (copyLabelRef.current) {
+      morphText(copyLabelRef.current, emailCopied ? "Copied!" : "Copy address");
+    }
+  }, [emailCopied]);
 
   // Navbar, two states like the reference screenshots:
   // - Without scroll: flat, no pill container, just brand + links
@@ -293,7 +352,7 @@ export default function Home() {
                     title={video.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
-                    className="absolute inset-0 h-full w-full border-0"
+                    className="v2-video-reveal absolute inset-0 h-full w-full border-0"
                   />
                 ) : (
                   <button
@@ -406,7 +465,7 @@ export default function Home() {
                   }}
                   className="cursor-target rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
                 >
-                  {emailCopied ? "Copied!" : "Copy address"}
+                  <span ref={copyLabelRef} className="t-morph">Copy address</span>
                 </button>
               </div>
             </div>
