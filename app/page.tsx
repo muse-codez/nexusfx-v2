@@ -44,23 +44,20 @@ export default function Home() {
   const [featuredClient, setFeaturedClient] = useState(0);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
-  // Navbar: smooth, no border/outline, hides on scroll down and
-  // shows again on scroll up (and always at the very top).
-  const [navVisible, setNavVisible] = useState(true);
+  // Navbar: hidden while the hero is on screen, appears smoothly
+  // once the user scrolls past it. All links (home / clients /
+  // videos / hire me) stay visible in the pill when it appears —
+  // nothing is collapsed into a menu.
+  const [navVisible, setNavVisible] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 40);
-      if (y < 100 || y < lastY) {
-        setNavVisible(true);
-      } else {
-        setNavVisible(false);
-      }
-      lastY = y;
+      setNavVisible(y > 100);
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -78,7 +75,7 @@ export default function Home() {
           and blur only, slides away on scroll down, back on scroll up. */}
       <header
         className={`fixed inset-x-0 top-4 z-50 flex justify-center px-4 transition-all duration-500 ease-out ${
-          navVisible ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0"
+          navVisible ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0 pointer-events-none"
         }`}
       >
         <nav
