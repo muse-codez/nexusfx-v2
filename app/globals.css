@@ -143,23 +143,6 @@ body {
    reveals left-to-right in 7 steps (one per letter of NexusFX),
    like it is being written. Clip-path is used so the gradient
    text and layout do not shift during the reveal. */
-.v2-write {
-  white-space: nowrap;
-}
-
-@keyframes v2-write {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-.group:hover .v2-write {
-  animation: v2-write 1.4s steps(7, end) forwards;
-}
-
 /* Wobble on the hero title: a gentle, continuous side-to-side
    rock (only ±1.5°, so it stays readable), on the title wrapper
    so the writing reveal and gradient are unaffected. */

@@ -191,7 +191,7 @@ export default function Home() {
             NEXUSFX
           </span>
           <span className="v2-wobble relative inline-block px-2 py-4">
-            <h1 className="v2-write v2-soft-blue-title font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
+            <h1 className="v2-soft-blue-title font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
               NexusFX
             </h1>
           </span>
