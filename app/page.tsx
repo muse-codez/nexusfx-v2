@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import DotField from "@/components/DotField";
 import IntroLoader from "@/components/IntroLoader";
+import Lightfall from "@/components/Lightfall";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -334,8 +335,28 @@ export default function Home() {
               @nexu.fx4
             </a>
           </div>
-          <div className="relative rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
-            <div className="relative inline-block border-2 border-black/25 px-6 py-4">
+          <div className="relative overflow-hidden rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
+            {/* Lightfall background, ONLY inside this hire panel
+                (the "Let's build your next video" box) — not the
+                whole page. Usage-example props as given. The
+                canvas sits behind the title and button (z-10). */}
+            <div aria-hidden="true" className="absolute inset-0 z-0">
+              <Lightfall
+                colors={["#ffffff"]}
+                backgroundColor="#94a3b8"
+                speed={0.3}
+                streakCount={2}
+                streakWidth={0.8}
+                twinkle={0.3}
+                backgroundGlow={0.1}
+                headGlow={0.6}
+                bloom={0.35}
+                mouseInteraction
+                holdToWarp
+                intro
+              />
+            </div>
+            <div className="relative z-10 inline-block border-2 border-black/25 px-6 py-4">
               <span className="absolute -left-2 -top-2 h-3 w-3 bg-black" />
               <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
