@@ -190,8 +190,8 @@ export default function Home() {
           <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
             NEXUSFX
           </span>
-          <span className="v2-wobble relative inline-block overflow-hidden">
-            <h1 className="v2-write font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight text-[#efe9dc]">
+          <span className="v2-wobble relative inline-block px-2 py-4">
+            <h1 className="v2-write v2-clay-title px-8 py-3 font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
               NexusFX
             </h1>
           </span>
@@ -212,8 +212,8 @@ export default function Home() {
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 left-4 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 right-4 text-sm text-white/30">✦</span>
-          <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide text-[#efe9dc] sm:text-7xl">
-            Creators I&apos;ve worked with
+          <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
+            <span className="v2-clay-title inline-block px-8 py-3">Creators I&apos;ve worked with</span>
           </h2>
           <div
             className="relative mx-auto mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:w-[46%] lg:grid-cols-3"
@@ -274,8 +274,8 @@ export default function Home() {
             <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
               featured work
             </span>
-            <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide text-[#efe9dc] sm:text-7xl">
-              Recent edits
+            <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
+              <span className="v2-clay-title inline-block px-8 py-3">Recent edits</span>
             </h2>
           </div>
         <div className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -373,10 +373,12 @@ export default function Home() {
               <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
               <span className="absolute -bottom-2 -right-2 h-3 w-3 bg-black" />
-              <h2 className="font-pixelify text-6xl font-extrabold leading-tight text-[#2e2b26] sm:text-8xl">
-                Let&apos;s build your
-                <br />
-                next video.
+              <h2 className="font-pixelify text-6xl font-extrabold leading-tight sm:text-8xl">
+                <span className="v2-clay-title inline-block px-10 py-6">
+                  Let&apos;s build your
+                  <br />
+                  next video.
+                </span>
               </h2>
             </div>
             <a

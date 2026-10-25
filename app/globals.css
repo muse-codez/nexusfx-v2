@@ -271,3 +271,19 @@ body {
   .v2-tile-scan, .v2-glitch { animation: none; }
   .v2-wipe { transition: none; }
 }
+
+/* Soft clay title: the title sits ON a puffy pastel plaque instead
+   of being flat coloured text. That is what makes clay look soft:
+   a pastel surface, a big round radius, an inset highlight on the
+   top-left, an inset shade on the bottom-right, and one large soft
+   drop shadow underneath — no gradient, no glow, no shine. */
+.v2-clay-title {
+  background: #fdf3dc;
+  color: #2e2a3f;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.35),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.9),
+    inset -4px -4px 10px rgba(190, 170, 130, 0.45);
+}
