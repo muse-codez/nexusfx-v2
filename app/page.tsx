@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
-import MicroSlats from "@/components/MicroSlats";
+import DotField from "@/components/DotField";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -65,27 +65,19 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
-      {/* Main background: React Bits MicroSlats, fixed behind all
-          content. Interactive (cursor stirs the slats, click splashes)
-          via window pointer events, so it works even though content
-          sits above it. Props are the usage example as given. */}
+      {/* Main background: React Bits DotField, fixed behind all
+          content. Interactive (cursor lens + glow) via window
+          pointer events, so it works even though content sits
+          above it. Props are the usage example as given. */}
       <div aria-hidden="true" className="fixed inset-0 z-0">
-        <MicroSlats
-          preset="swell"
-          color="#A855F7"
-          glintColor="#ffffff"
-          backgroundColor="#000000"
-          slatWidth={10}
-          slatHeight={25}
-          gap={3}
-          roundness={0.75}
-          interactive
-          cursorStrength={1}
-          cursorSize={40}
-          swirl={0}
-          trail={1.4}
-          lean={0}
-          intro
+        <DotField
+          gradientFrom="#5227FF"
+          gradientTo="#FF9FFC"
+          dotRadius={1.5}
+          dotSpacing={14}
+          cursorRadius={240}
+          bulgeStrength={0.6}
+          glowRadius={160}
         />
       </div>
       {/* Navbar width: old centred pill was max-w-2xl, which was
