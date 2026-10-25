@@ -26,19 +26,23 @@ const CLIENTS = [
   { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", url: "https://www.youtube.com/@AyushBhandari" },
 ] as const;
 
+// Showcase videos copied from v1 (components/showcase.tsx):
+// placeholder picks for now, one per creator, verified in v1 via
+// YouTube oEmbed. Replace these IDs later with real portfolio pieces.
 const VIDEOS = [
-  { title: "The Heist That Broke the Lobby", creator: "PixelPlay", gradient: "from-purple-600 via-fuchsia-500 to-pink-500" },
-  { title: "100 Days in a Pixel World", creator: "GameVault", gradient: "from-sky-600 via-cyan-500 to-teal-400" },
-  { title: "Every Loot Drop, Ranked", creator: "LootLab", gradient: "from-amber-500 via-orange-500 to-rose-500" },
-  { title: "The Shot Nobody Believed", creator: "NoScope", gradient: "from-emerald-500 via-teal-500 to-cyan-500" },
-  { title: "Back From Zero Health", creator: "Respawn", gradient: "from-rose-600 via-red-500 to-orange-400" },
-  { title: "The Comeback in Round 12", creator: "ClutchCast", gradient: "from-violet-600 via-indigo-500 to-sky-500" },
+  { id: "voAnIhI5PF8", title: "I MET THE PRIME MINISTER OF INDIA", creator: "GamerFleet", creatorUrl: "https://www.youtube.com/@GamerFleet", creatorLogo: "/creators/gamerfleet.jpg" },
+  { id: "H5fyiYtyLjw", title: "Finding EVERY ANOMALY in SCHOOL!", creator: "I. M. Bixu", creatorUrl: "https://www.youtube.com/@imbixu", creatorLogo: "/creators/imbixu.jpg" },
+  { id: "zbM-A_VKd58", title: "BeckBro's Cereal Tier List", creator: "BeckBros", creatorUrl: "https://www.youtube.com/@beckbros", creatorLogo: "/creators/beckbros.jpg" },
+  { id: "2JHbnL5rj6c", title: "BeckBros Play Heave Ho 2", creator: "BeckBroBlox", creatorUrl: "https://www.youtube.com/@BeckBroBlox", creatorLogo: "/creators/beckbroblox.jpg" },
+  { id: "Jaj75z2hGwo", title: "I 3D Printed a FOLDABLE iPhone...", creator: "SarahGrace", creatorUrl: "https://www.youtube.com/@TheSarahGrace", creatorLogo: "/creators/sarahgrace.jpg" },
+  { id: "HsMemCsMGyc", title: "I Tried Every Celebrity Experience!", creator: "Ayush Bhandari", creatorUrl: "https://www.youtube.com/@AyushBhandari", creatorLogo: "/creators/ayushbhandari.jpg" },
 ] as const;
 
 export default function Home() {
   // Featured client tile: first tile at rest, transfers to the tile
   // under the cursor on hover, and returns when the cursor leaves.
   const [featuredClient, setFeaturedClient] = useState(0);
+  const [playingId, setPlayingId] = useState<string | null>(null);
 
   // Navbar: smooth, no border/outline, hides on scroll down and
   // shows again on scroll up (and always at the very top).
@@ -174,7 +178,7 @@ export default function Home() {
             Creators I&apos;ve worked with
           </h2>
           <div
-            className="relative mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+            className="relative mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3"
             onMouseLeave={() => setFeaturedClient(0)}
           >
             {CLIENTS.map((client, index) => {
@@ -195,7 +199,7 @@ export default function Home() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain p-3"
                   />
                   {/* Metal shine: bright top-left sweep over the tile */}
                   <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
@@ -211,45 +215,70 @@ export default function Home() {
               );
             })}
           </div>
+          {/* Recent edits — v1 showcase, inside the same metal card,
+              which now expands to the end of the showcase. */}
+          <div id="videos" className="relative mt-16 scroll-mt-24 text-center">
+            <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
+              featured work
+            </span>
+            <h2 className="mt-6 font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
+              Recent edits
+            </h2>
+          </div>
+        <div className="relative mt-10 grid gap-6 sm:grid-cols-2">
+          {VIDEOS.map((video) => (
+            <article key={video.id}>
+              <div className="relative aspect-video overflow-hidden rounded-[2rem] bg-black shadow-lg ring-1 ring-zinc-300/40">
+                {playingId === video.id ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setPlayingId(video.id)}
+                    aria-label={`Play ${video.title}`}
+                    className="group absolute inset-0 h-full w-full cursor-pointer"
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                      alt={video.title}
+                      loading="lazy"
+                      draggable={false}
+                      className="h-full w-full object-cover transition-opacity duration-300 group-hover:opacity-80"
+                    />
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white ring-1 ring-white/60 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.18] group-hover:bg-[#f7078e] group-hover:shadow-[0_0_20px_rgba(247,7,142,0.85)]">
+                        <Play size={24} weight="Filled" />
+                      </span>
+                    </span>
+                  </button>
+                )}
+              </div>
+              <h3 className="mt-3 text-left font-mono text-sm font-medium leading-snug text-white">
+                {video.title}
+              </h3>
+              <a
+                href={video.creatorUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 flex items-center gap-2 font-mono text-xs text-white/70 transition hover:text-white"
+              >
+                <img src={video.creatorLogo} alt={video.creator} className="h-5 w-5 rounded-full object-cover" />
+                {video.creator}
+              </a>
+            </article>
+          ))}
+        </div>
           <div className="relative mt-10 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] text-white/50">
             <span>CLIENTS · 06</span>
             <span>+</span>
             <span>NEXUSFX · 2026</span>
           </div>
-        </div>
-      </section>
-
-      {/* Featured videos — landscape edge-to-edge cards, no caption below */}
-      <section id="videos" className="mx-auto max-w-3xl px-4 pb-24">
-        <div className="text-center">
-          <span className="rounded-full border border-white/15 px-4 py-1 font-mono text-xs text-white/70">
-            featured work
-          </span>
-          <h2 className="mt-6 font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
-            Recent edits
-          </h2>
-        </div>
-        <div className="group/grid mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {VIDEOS.map((video) => (
-            <article
-              key={video.title}
-              className="group transition duration-300 group-hover/grid:opacity-40 hover:opacity-100"
-            >
-              <div
-                className={`relative aspect-video overflow-hidden rounded-[2rem] bg-gradient-to-br ${video.gradient} shadow-lg ring-1 ring-zinc-300/40 transition duration-300 group-hover:scale-[1.03] group-hover:brightness-110 group-hover:shadow-2xl`}
-              >
-                {/* Metal shine: bright top-left sweep over the card */}
-                <span className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
-                {/* Title appears only on hover, bottom-left inside the card */}
-                <span className="absolute bottom-3 left-3 max-w-[70%] rounded-full bg-black/70 px-3 py-1 text-left font-mono text-[11px] leading-snug text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {video.title}
-                </span>
-                <span className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white ring-1 ring-white/60 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.18] hover:bg-[#f7078e] hover:shadow-[0_0_20px_rgba(247,7,142,0.85)] hover:ring-white">
-                  <Play size={20} weight="Filled" />
-                </span>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 
