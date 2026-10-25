@@ -109,20 +109,22 @@ export default function Home() {
         <nav
           className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
             scrolled
-              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 shadow-[0_0_28px_rgba(247,7,142,0.35),0_0_28px_rgba(163,230,53,0.25)] ring-1 ring-white/10 backdrop-blur-xl"
+              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-xl"
               : "bg-transparent px-2 py-1"
           }`}
         >
-          <a href="#top" className="v2-gradient-text bg-gradient-to-r from-lime-400 via-pink-500 to-violet-500 bg-clip-text font-orbitron text-xl font-black tracking-wider text-transparent transition-transform duration-300 hover:scale-105">
-            NexusFX
+          <a href="#top" className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 rounded-full object-cover" />
+            <span className="font-pixelify text-xl font-bold text-lime-400">NexusFX</span>
           </a>
-          <div className="flex items-center gap-1 font-orbitron text-[11px] uppercase tracking-wider sm:gap-2 sm:text-xs">
+          <div className="flex items-center gap-1 font-pixelify text-xs uppercase sm:gap-2 sm:text-sm">
             <a
               href="#top"
               className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "top"
-                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
-                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
+                  ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
               }`}
             >
               home
@@ -131,8 +133,8 @@ export default function Home() {
               href="#clients"
               className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "clients"
-                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
-                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
+                  ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
               }`}
             >
               clients
@@ -141,8 +143,8 @@ export default function Home() {
               href="#videos"
               className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "videos"
-                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
-                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
+                  ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
               }`}
             >
               videos
@@ -151,8 +153,8 @@ export default function Home() {
               href="#hire"
               className={`v2-shine-wrap relative overflow-hidden rounded-full px-3 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
                 active === "hire"
-                  ? "bg-gradient-to-r from-lime-400 to-pink-500 text-black shadow-[0_0_18px_rgba(247,7,142,0.6)]"
-                  : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600 hover:shadow-[0_0_18px_rgba(236,72,153,0.7)]"
+                  ? "bg-[#3884ff] shadow-[0_0_18px_rgba(56,132,255,0.6)]"
+                  : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600"
               }`}
             >
               hire <span aria-hidden="true" className="v2-shine-beam" />

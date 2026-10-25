@@ -14,7 +14,6 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-minecraft: var(--font-minecraft-font);
   --font-pixelify: var(--font-pixelify-sans);
-  --font-orbitron: var(--font-orbitron);
 }
 
 @media (prefers-color-scheme: dark) {
