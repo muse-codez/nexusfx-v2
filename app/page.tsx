@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
@@ -37,18 +37,48 @@ export default function Home() {
   // under the cursor on hover, and returns when the cursor leaves.
   const [featuredClient, setFeaturedClient] = useState(0);
 
+  // Navbar: smooth, no border/outline, hides on scroll down and
+  // shows again on scroll up (and always at the very top).
+  const [navVisible, setNavVisible] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 40);
+      if (y < 100 || y < lastY) {
+        setNavVisible(true);
+      } else {
+        setNavVisible(false);
+      }
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div
-      className="min-h-screen bg-[#0a0a0a] font-sans text-white"
-      style={{
-        backgroundImage:
-          "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)",
-        backgroundSize: "24px 24px",
-      }}
-    >
-      {/* Fixed pill nav */}
-      <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-        <nav className="flex w-full max-w-2xl items-center justify-between rounded-full border border-white/10 bg-black/70 px-5 py-3 backdrop-blur">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
+      {/* Background glow instead of dots: soft lime / pink / violet
+          glows, fixed behind the content, no dot texture. */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-lime-400/15 blur-3xl" />
+        <div className="absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-pink-500/15 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-violet-600/10 blur-3xl" />
+      </div>
+      {/* Smooth pill nav: no border, no ring, no outline — shadow
+          and blur only, slides away on scroll down, back on scroll up. */}
+      <header
+        className={`fixed inset-x-0 top-4 z-50 flex justify-center px-4 transition-all duration-500 ease-out ${
+          navVisible ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0"
+        }`}
+      >
+        <nav
+          className={`flex w-full max-w-2xl items-center justify-between rounded-full px-5 py-3 shadow-xl shadow-black/40 backdrop-blur-xl transition-colors duration-500 ${
+            scrolled ? "bg-black/80" : "bg-black/60"
+          }`}
+        >
           <a href="#top" className="font-balloon text-xl font-extrabold tracking-tight">
             NexusFX
           </a>
