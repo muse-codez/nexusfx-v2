@@ -120,7 +120,7 @@ export default function Home() {
             NEXUSFX
           </span>
           <span className="relative inline-block overflow-hidden">
-            <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-6xl font-extrabold leading-none tracking-tight text-transparent sm:text-8xl">
+            <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-[clamp(4rem,16vw,11rem)] font-extrabold leading-none tracking-tight text-transparent">
               NexusFX
             </h1>
             <span aria-hidden="true" className="v2-shine-beam" />
