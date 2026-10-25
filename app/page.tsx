@@ -178,7 +178,7 @@ export default function Home() {
             Creators I&apos;ve worked with
           </h2>
           <div
-            className="relative mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3"
+            className="relative mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
             onMouseLeave={() => setFeaturedClient(0)}
           >
             {CLIENTS.map((client, index) => {
@@ -199,7 +199,7 @@ export default function Home() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-full object-contain p-3"
+                    className="h-full w-full object-cover"
                   />
                   {/* Metal shine: bright top-left sweep over the tile */}
                   <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
