@@ -102,57 +102,57 @@ export default function Home() {
           good; this is slightly longer at max-w-3xl, same width in
           both states so it does not jump when scrolling. */}
       <header
-        className={`fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ease-out ${
+        className={`v2-nav-drop fixed inset-x-0 z-50 flex justify-center transition-all duration-500 ease-out ${
           scrolled ? "top-4 px-4" : "top-0 px-4 py-4"
         }`}
       >
         <nav
           className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
             scrolled
-              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-xl"
+              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 shadow-[0_0_28px_rgba(247,7,142,0.35),0_0_28px_rgba(163,230,53,0.25)] ring-1 ring-white/10 backdrop-blur-xl"
               : "bg-transparent px-2 py-1"
           }`}
         >
-          <a href="#top" className="font-pixelify text-xl font-extrabold tracking-tight">
+          <a href="#top" className="v2-gradient-text bg-gradient-to-r from-lime-400 via-pink-500 to-violet-500 bg-clip-text font-orbitron text-xl font-black tracking-wider text-transparent transition-transform duration-300 hover:scale-105">
             NexusFX
           </a>
-          <div className="flex items-center gap-1 font-mono text-xs sm:gap-2 sm:text-sm">
+          <div className="flex items-center gap-1 font-orbitron text-[11px] uppercase tracking-wider sm:gap-2 sm:text-xs">
             <a
               href="#top"
-              className={`rounded px-3 py-1 transition ${
+              className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "top"
-                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
-                  : "text-white hover:bg-white/10"
+                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
               }`}
             >
               home
             </a>
             <a
               href="#clients"
-              className={`rounded px-3 py-1 transition ${
+              className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "clients"
-                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
-                  : "text-white hover:bg-white/10"
+                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
               }`}
             >
               clients
             </a>
             <a
               href="#videos"
-              className={`rounded px-3 py-1 transition ${
+              className={`rounded-full px-3 py-1 transition-all duration-300 ${
                 active === "videos"
-                  ? "bg-[#3884ff] font-semibold text-white hover:bg-[#4a90ff]"
-                  : "text-white hover:bg-white/10"
+                  ? "bg-gradient-to-r from-lime-400 to-pink-500 font-bold text-black shadow-[0_0_18px_rgba(247,7,142,0.6)] hover:scale-105"
+                  : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white hover:shadow-[0_0_14px_rgba(255,255,255,0.25)]"
               }`}
             >
               videos
             </a>
             <a
               href="#hire"
-              className={`v2-shine-wrap relative overflow-hidden rounded px-3 py-1 font-semibold text-white transition ${
+              className={`v2-shine-wrap relative overflow-hidden rounded-full px-3 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
                 active === "hire"
-                  ? "bg-[#3884ff] hover:bg-[#4a90ff]"
-                  : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600"
+                  ? "bg-gradient-to-r from-lime-400 to-pink-500 text-black shadow-[0_0_18px_rgba(247,7,142,0.6)]"
+                  : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600 hover:shadow-[0_0_18px_rgba(236,72,153,0.7)]"
               }`}
             >
               hire <span aria-hidden="true" className="v2-shine-beam" />

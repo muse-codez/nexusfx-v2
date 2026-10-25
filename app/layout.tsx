@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Pixelify_Sans } from "next/font/google";
+import { Orbitron, Pixelify_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
 // Pixelify Sans from Google Fonts — pixel style, but far more
 // readable than a blocky pixel font, so it works for the name and
 // titles, not just tiny labels.
+// Orbitron — new Google font for the navbar only: futuristic,
+  // gaming/esports style, shiny when paired with a gradient.
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+});
+
 const pixelify = Pixelify_Sans({
   variable: "--font-pixelify-sans",
   subsets: ["latin"],
@@ -69,7 +77,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${pixelify.variable} ${minecraftFont.variable} h-full antialiased`}
+      className={`${pixelify.variable} ${minecraftFont.variable} ${orbitron.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
