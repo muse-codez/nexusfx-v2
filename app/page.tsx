@@ -304,7 +304,7 @@ export default function Home() {
                     onClick={() => setPlayingId(video.id)}
                     aria-label={`Play ${video.title}`}
                     data-cursor-label="Play"
-                    className="group absolute inset-0 h-full w-full cursor-pointer"
+                    className="cursor-target group absolute inset-0 h-full w-full cursor-pointer"
                   >
                     <img
                       src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
