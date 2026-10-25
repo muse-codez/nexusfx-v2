@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Baloo_2, Geist, Geist_Mono, Press_Start_2P } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,19 +13,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Minecraft-style pixel font (Press Start 2P, openly licensed on Google
-// Fonts — the actual Minecraft font is not freely licensed, so this is
-// the closest pixel style, not a Minecraft asset).
-const pixel = Press_Start_2P({
+// Fonts supplied by the user (in app/fonts/, loaded locally):
+// - Minecraft.ttf: the actual Minecraft-style pixel font, for labels.
+// - BALLOON_DREAMS.otf: balloon-style font, for the name and titles.
+// - Fungky_Brow_DEMO.otf: bubbly balloon-style demo font, used only
+//   for short uppercase section titles — the demo has only 56 glyphs,
+//   so it is not used for long or mixed-case text.
+const minecraftFont = localFont({
+  src: "./fonts/Minecraft.ttf",
+  variable: "--font-minecraft",
   weight: "400",
-  variable: "--font-pixel",
-  subsets: ["latin"],
 });
 
-// Balloon-style rounded font for the name (Baloo 2).
-const baloo = Baloo_2({
-  variable: "--font-baloo",
-  subsets: ["latin"],
+const balloonFont = localFont({
+  src: "./fonts/BALLOON_DREAMS.otf",
+  variable: "--font-balloon",
+  weight: "400",
+});
+
+const fungkyFont = localFont({
+  src: "./fonts/Fungky_Brow_DEMO.otf",
+  variable: "--font-fungky",
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -36,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${pixel.variable} ${baloo.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${minecraftFont.variable} ${balloonFont.variable} ${fungkyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

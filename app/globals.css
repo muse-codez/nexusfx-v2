@@ -10,8 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-pixel: var(--font-pixel);
-  --font-baloo: var(--font-baloo);
+  --font-minecraft: var(--font-minecraft);
+  --font-balloon: var(--font-balloon);
+  --font-fungky: var(--font-fungky);
 }
 
 @media (prefers-color-scheme: dark) {
