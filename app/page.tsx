@@ -145,12 +145,11 @@ export default function Home() {
   // Scroll-linked hero zoom-out + card slide-up:
   // - Hero is sticky, so it stays pinned while the clients card
   //   scrolls up OVER it (hero goes "under" the card).
-  // - The VIDEO itself is NOT scaled: it stays full-bleed and in
-  //   front of the page background (hero back at z-10, as before),
-  //   so it never shrinks into a small rectangle with background
-  //   showing around it. Only the hero CONTENT (title box) scales
-  //   down 1 -> 0.82 and fades 1 -> 0.25 over one hero-height of
-  //   scroll: the zoom-out, without pushing the video behind.
+  // - No zoom-out anymore (removed at the user's request):
+  //   the hero content no longer scales or fades on scroll.
+  //   Only the slide stays: the metal card starts 80px low and
+  //   eases up to 0 over one hero-height of scroll, sliding up
+  //   over the pinned hero. Video stays full-bleed at z-10.
   // - The metal card itself starts 80px low and eases up to 0,
   //   so it slides up over the shrinking hero.
   // - A soft spring (low stiffness) on scrollY makes it all
@@ -171,8 +170,6 @@ export default function Home() {
   }, []);
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, { stiffness: 55, damping: 20, mass: 1 });
-  const heroScale = useTransform(smoothScrollY, [0, heroHeight], [1, 0.82]);
-  const heroOpacity = useTransform(smoothScrollY, [0, heroHeight * 0.7, heroHeight], [1, 0.55, 0.25]);
   const cardY = useTransform(smoothScrollY, [0, heroHeight], [80, 0]);
   const reduceMotion = useReducedMotion();
 
@@ -282,13 +279,6 @@ export default function Home() {
           src="https://www.notenemyok.com/VIDS/background%20video.mp4"
         />
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/20" />
-        <motion.div
-          style={{
-            scale: reduceMotion ? 1 : heroScale,
-            opacity: reduceMotion ? 1 : heroOpacity,
-          }}
-          className="relative z-10"
-        >
         <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
@@ -310,13 +300,9 @@ export default function Home() {
             edits that hold attention
           </p>
         </div>
-        </motion.div>
-        <motion.p
-          style={{ opacity: reduceMotion ? 1 : heroOpacity }}
-          className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur"
-        >
+        <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
-        </motion.p>
+        </p>
       </motion.section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
