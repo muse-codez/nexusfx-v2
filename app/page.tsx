@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
+import MicroSlats from "@/components/MicroSlats";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -64,12 +65,28 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
-      {/* Background glow instead of dots: soft lime / pink / violet
-          glows, fixed behind the content, no dot texture. */}
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-lime-400/15 blur-3xl" />
-        <div className="absolute top-1/3 -right-32 h-96 w-96 rounded-full bg-pink-500/15 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-violet-600/10 blur-3xl" />
+      {/* Main background: React Bits MicroSlats, fixed behind all
+          content. Interactive (cursor stirs the slats, click splashes)
+          via window pointer events, so it works even though content
+          sits above it. Props are the usage example as given. */}
+      <div aria-hidden="true" className="fixed inset-0 z-0">
+        <MicroSlats
+          preset="swell"
+          color="#A855F7"
+          glintColor="#ffffff"
+          backgroundColor="#000000"
+          slatWidth={10}
+          slatHeight={25}
+          gap={3}
+          roundness={0.75}
+          interactive
+          cursorStrength={1}
+          cursorSize={40}
+          swirl={0}
+          trail={1.4}
+          lean={0}
+          intro
+        />
       </div>
       {/* Smooth pill nav: no border, no ring, no outline — shadow
           and blur only, slides away on scroll down, back on scroll up. */}
@@ -109,7 +126,7 @@ export default function Home() {
       {/* Hero — full viewport, centred */}
       <section
         id="top"
-        className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
         {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
             this video is notenemyok.com's asset, not NexusFX's.
@@ -153,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
-      <section id="clients" className="w-full px-2 pb-24 sm:px-4">
+      <section id="clients" className="relative z-10 w-full px-2 pb-24 sm:px-4">
         <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
@@ -269,7 +286,7 @@ export default function Home() {
       </section>
 
       {/* Hire — closing panel */}
-      <section id="hire" className="px-4 pb-16">
+      <section id="hire" className="relative z-10 px-4 pb-16">
         <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
           <div className="flex items-center justify-between px-4 py-3 font-mono text-xs text-black/70">
             <span className="font-bold text-black">NexusFX — Video Editor</span>
