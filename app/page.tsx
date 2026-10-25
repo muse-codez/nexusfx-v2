@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
+import { Play } from "reicon-react";
 import DotField from "@/components/DotField";
 import IntroLoader from "@/components/IntroLoader";
-import Lightfall from "@/components/Lightfall";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -335,78 +334,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hire — closing panel */}
-      <section id="hire" className="relative z-10 px-4 pb-16">
-        <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
-          <div className="flex items-center justify-between px-4 py-3 font-mono text-xs text-black/70">
-            <span className="font-bold text-black">NexusFX — Video Editor</span>
-            <a
-              href="https://www.instagram.com/nexu.fx4"
-              className="rounded-full bg-white px-4 py-1 font-semibold text-black/60 transition hover:text-blue-700"
-            >
-              @nexu.fx4
-            </a>
-          </div>
-          <div className="relative overflow-hidden rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
-            {/* Lightfall background, ONLY inside this hire panel
-                (the "Let's build your next video" box) — not the
-                whole page. Usage-example props as given. The
-                canvas sits behind the title and button (z-10). */}
-            <div aria-hidden="true" className="absolute inset-0 z-0">
-              <Lightfall
-                colors={["#ffffff"]}
-                backgroundColor="#94a3b8"
-                speed={0.3}
-                streakCount={2}
-                streakWidth={0.8}
-                twinkle={0.3}
-                backgroundGlow={0.1}
-                headGlow={0.6}
-                bloom={0.35}
-                mouseInteraction
-                holdToWarp
-                intro
-              />
-            </div>
-            <div className="relative z-10 inline-block border-2 border-black/25 px-6 py-4">
-              <span className="absolute -left-2 -top-2 h-3 w-3 bg-black" />
-              <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
-              <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
-              <span className="absolute -bottom-2 -right-2 h-3 w-3 bg-black" />
-              <h2 className="font-pixelify text-6xl font-extrabold leading-tight sm:text-8xl">
-                <span className="v2-soft-blue-title">
-                  Let&apos;s build your
-                  <br />
-                  next video.
-                </span>
-              </h2>
-            </div>
-            <a
-              href="mailto:nexusfx.media@gmail.com"
-              className="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 hover:bg-pink-500 hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
-            >
-              Hire me <ArrowUpRight size={18} weight="Filled" />
-            </a>
-          </div>
-          <div className="flex flex-col items-center justify-between gap-4 px-4 py-5 text-black sm:flex-row">
-            <a
-              href="mailto:nexusfx.media@gmail.com"
-              className="flex items-center gap-2 rounded-full px-3 py-1 font-mono text-sm transition hover:-translate-y-0.5 hover:text-blue-700 hover:shadow-md"
-            >
-              <Envelope size={18} weight="Filled" /> nexusfx.media@gmail.com
-            </a>
-            <a
-              href="https://www.instagram.com/nexu.fx4"
-              className="flex items-center gap-2 rounded-full px-3 py-1 font-mono text-sm transition hover:-translate-y-0.5 hover:text-blue-700 hover:shadow-md"
-            >
-              <Instagram size={18} weight="Filled" /> @nexu.fx4
-            </a>
-          </div>
-        </div>
-        <p className="mt-8 text-center font-mono text-xs text-white/40">
+      {/* Site footer line only — the hire card itself is removed
+          for now, to be rebuilt as the user directs next. */}
+      <footer className="relative z-10 px-4 pb-16">
+        <p className="text-center font-mono text-xs text-white/40">
           © 2026 NexusFX
         </p>
-      </section>
+      </footer>
     </div>
   );
 }
