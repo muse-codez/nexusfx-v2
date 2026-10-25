@@ -240,3 +240,34 @@ body {
     animation: none;
   }
 }
+
+/* Creator tiles — uncommon hover, NOT zoom/scale:
+   HUD target-lock (corner brackets) + a scanline sweeping top to
+   bottom once per hover + info revealed by a left-to-right wipe
+   + a short glitch flicker on the name. */
+.v2-tile-scan {
+  animation: v2-tile-scan 0.9s ease-out forwards;
+}
+@keyframes v2-tile-scan {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: calc(100% - 2px); opacity: 0; }
+}
+.v2-wipe {
+  transition: clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.v2-glitch {
+  animation: v2-glitch 0.45s steps(2, end);
+}
+@keyframes v2-glitch {
+  0% { transform: translateX(0); text-shadow: none; }
+  25% { transform: translateX(-2px); text-shadow: 2px 0 rgba(247, 7, 142, 0.8), -2px 0 rgba(56, 189, 248, 0.8); }
+  50% { transform: translateX(2px); text-shadow: -2px 0 rgba(247, 7, 142, 0.8), 2px 0 rgba(56, 189, 248, 0.8); }
+  75% { transform: translateX(-1px); text-shadow: none; }
+  100% { transform: translateX(0); text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-tile-scan, .v2-glitch { animation: none; }
+  .v2-wipe { transition: none; }
+}

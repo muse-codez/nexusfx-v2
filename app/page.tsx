@@ -231,29 +231,37 @@ export default function Home() {
                   onMouseEnter={() => setFeaturedClient(index)}
                   onFocus={() => setFeaturedClient(index)}
                   onBlur={() => setFeaturedClient(null)}
-                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-all duration-300 ${
+                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 ${
                     featured
-                      ? "z-10 scale-110 ring-2 ring-white/80 shadow-2xl"
-                      : "scale-100"
+                      ? "z-10 ring-2 ring-lime-400/80 shadow-[0_0_28px_rgba(163,230,53,0.35)]"
+                      : ""
                   }`}
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className={`h-full w-full object-cover transition-transform duration-300 ${
-                      featured ? "scale-110" : "scale-100"
-                    }`}
+                    className="h-full w-full object-cover" 
                   />
                   {/* Metal shine: bright top-left sweep over the tile */}
                   <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
-                  {/* Hover info: only on the hovered tile, sliding up
-                      from the bottom — name, who they are, subscribers */}
+                  {/* HUD target-lock: four corner brackets, only on hover */}
+                  <span aria-hidden="true" className={`pointer-events-none absolute inset-2 transition-opacity duration-200 ${featured ? "opacity-100" : "opacity-0"}`}>
+                    <span className="absolute left-0 top-0 h-5 w-5 border-l-2 border-t-2 border-lime-400" />
+                    <span className="absolute right-0 top-0 h-5 w-5 border-r-2 border-t-2 border-lime-400" />
+                    <span className="absolute bottom-0 left-0 h-5 w-5 border-b-2 border-l-2 border-lime-400" />
+                    <span className="absolute bottom-0 right-0 h-5 w-5 border-b-2 border-r-2 border-lime-400" />
+                  </span>
+                  {/* Scanline: sweeps top to bottom once per hover entry */}
+                  {featured && (
+                    <span aria-hidden="true" className="v2-tile-scan pointer-events-none absolute inset-x-0 h-[2px] bg-lime-400 shadow-[0_0_12px_rgba(163,230,53,0.9)]" />
+                  )}
+                  {/* Hover info: revealed by a left-to-right wipe, not a
+                      slide/fade — name gets a short glitch flicker */}
                   <span
-                    className={`absolute inset-x-0 bottom-0 block bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-3 pt-8 text-left transition-all duration-300 ${
-                      featured ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-                    }`}
+                    className="v2-wipe absolute inset-x-0 bottom-0 block bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-3 pt-8 text-left"
+                    style={{ clipPath: featured ? "inset(0 0 0 0)" : "inset(0 100% 0 0)" }}
                   >
-                    <span className="block text-sm font-bold text-white">{client.name}</span>
+                    <span className={`block text-sm font-bold text-white ${featured ? "v2-glitch" : ""}`}>{client.name}</span>
                     <span className="mt-0.5 block text-xs leading-snug text-white/80">{client.desc}</span>
                     <span className="mt-1 block text-xs font-semibold text-lime-300">{client.subs}</span>
                   </span>
