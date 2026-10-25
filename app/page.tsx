@@ -20,13 +20,16 @@ import Lightfall from "@/components/Lightfall";
 // Real NexusFX creators, copied from v1 (components/about.tsx):
 // logos are the channels' official YouTube avatars, copied from
 // v1 public/creators/ into v2 public/creators/. No longer fictional.
+// Subscriber counts + "who" lines read from each channel's official
+// YouTube page on 2026-10-25. Counts drift as channels grow, so
+// refresh them from the channel pages if they start looking stale.
 const CLIENTS = [
-  { name: "GamerFleet", logo: "/creators/gamerfleet.jpg", url: "https://www.youtube.com/@GamerFleet" },
-  { name: "I. M. Bixu", logo: "/creators/imbixu.jpg", url: "https://www.youtube.com/@imbixu" },
-  { name: "BeckBros", logo: "/creators/beckbros.jpg", url: "https://www.youtube.com/@beckbros" },
-  { name: "BeckBroBlox", logo: "/creators/beckbroblox.jpg", url: "https://www.youtube.com/@BeckBroBlox" },
-  { name: "SarahGrace", logo: "/creators/sarahgrace.jpg", url: "https://www.youtube.com/@TheSarahGrace" },
-  { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", url: "https://www.youtube.com/@AyushBhandari" },
+  { name: "GamerFleet", logo: "/creators/gamerfleet.jpg", url: "https://www.youtube.com/@GamerFleet", subs: "6.05M subscribers", desc: "Indian gaming creator — Minecraft, Lilyville series" },
+  { name: "I. M. Bixu", logo: "/creators/imbixu.jpg", url: "https://www.youtube.com/@imbixu", subs: "4.46M subscribers", desc: "Gaming creator — horror & gameplay, “To Make You Smile!”" },
+  { name: "BeckBros", logo: "/creators/beckbros.jpg", url: "https://www.youtube.com/@beckbros", subs: "698K subscribers", desc: "IRL channel — funny videos & challenges with friends" },
+  { name: "BeckBroBlox", logo: "/creators/beckbroblox.jpg", url: "https://www.youtube.com/@BeckBroBlox", subs: "158K subscribers", desc: "Roblox gameplay" },
+  { name: "SarahGrace", logo: "/creators/sarahgrace.jpg", url: "https://www.youtube.com/@TheSarahGrace", subs: "3.76M subscribers", desc: "Tech, unboxing & fun — iPhone / Apple" },
+  { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", url: "https://www.youtube.com/@AyushBhandari", subs: "6.74M subscribers", desc: "Experience & challenge videos" },
 ] as const;
 
 // Showcase videos copied from v1 (components/showcase.tsx):
@@ -42,9 +45,10 @@ const VIDEOS = [
 ] as const;
 
 export default function Home() {
-  // Featured client tile: first tile at rest, transfers to the tile
-  // under the cursor on hover, and returns when the cursor leaves.
-  const [featuredClient, setFeaturedClient] = useState(0);
+  // Featured client tile: NO tile is featured at rest, so all six
+  // tiles sit in exactly the same state. Hover (or keyboard focus)
+  // features a tile, and leaving it clears the feature again.
+  const [featuredClient, setFeaturedClient] = useState<number | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   // Navbar, two states like the reference screenshots:
@@ -214,7 +218,7 @@ export default function Home() {
           </h2>
           <div
             className="relative mx-auto mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:w-[46%] lg:grid-cols-3"
-            onMouseLeave={() => setFeaturedClient(0)}
+            onMouseLeave={() => setFeaturedClient(null)}
           >
             {CLIENTS.map((client, index) => {
               const featured = featuredClient === index;
@@ -225,6 +229,8 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   onMouseEnter={() => setFeaturedClient(index)}
+                  onFocus={() => setFeaturedClient(index)}
+                  onBlur={() => setFeaturedClient(null)}
                   className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-all duration-300 ${
                     featured
                       ? "z-10 scale-110 ring-2 ring-white/80 shadow-2xl"
@@ -234,17 +240,22 @@ export default function Home() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-full object-cover"
+                    className={`h-full w-full object-cover transition-transform duration-300 ${
+                      featured ? "scale-110" : "scale-100"
+                    }`}
                   />
                   {/* Metal shine: bright top-left sweep over the tile */}
                   <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
-                  {/* Name pill: only on the featured tile, bottom centre */}
+                  {/* Hover info: only on the hovered tile, sliding up
+                      from the bottom — name, who they are, subscribers */}
                   <span
-                    className={`absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black px-3 py-1 font-mono text-xs text-white transition-opacity duration-300 ${
-                      featured ? "opacity-100" : "opacity-0"
+                    className={`absolute inset-x-0 bottom-0 block bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-3 pt-8 text-left transition-all duration-300 ${
+                      featured ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
                     }`}
                   >
-                    {client.name}
+                    <span className="block text-sm font-bold text-white">{client.name}</span>
+                    <span className="mt-0.5 block text-xs leading-snug text-white/80">{client.desc}</span>
+                    <span className="mt-1 block text-xs font-semibold text-lime-300">{client.subs}</span>
                   </span>
                 </a>
               );
