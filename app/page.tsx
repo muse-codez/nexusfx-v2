@@ -142,14 +142,17 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Card slide-up only, NO sticky overlay (removed: sticky hero
-  // leaked the hero video into the hire section and the sides of
-  // the card, because the card is contained and hire has a
-  // transparent background, so the pinned video showed through
-  // every gap after the card). Hero now scrolls away normally;
-  // the metal card itself slides up 80px -> 0 over one
-  // hero-height of scroll, so the slide feel stays without any
-  // overlay and without video showing up where it should not.
+  // Slide overlay, back as the user wanted, WITH the leak fix:
+  // - Hero is sticky again, clients card (z-20) slides up OVER it.
+  // - NO zoom (no scale at all). The only extra is a hero
+  //   fade-out: as the card covers the hero over one hero-height
+  //   of scroll, hero opacity goes 1 -> 0. So once the card has
+  //   covered it, the hero (video included) is invisible — it
+  //   cannot leak into the hire section, the card sides, or the
+  //   gap after the card, even though the hero keeps moving with
+  //   the page afterwards. The fade uses raw scrollY (no spring
+  //   lag), so it never lags behind and shows a video strip.
+  // - The card itself still slides 80px -> 0 on the soft spring.
   // - A soft spring (low stiffness) on scrollY makes it all
   //   lazy/smooth instead of snapping to the scroll position.
   // - Reduced-motion users get no slide.
@@ -166,6 +169,7 @@ export default function Home() {
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, { stiffness: 55, damping: 20, mass: 1 });
   const cardY = useTransform(smoothScrollY, [0, heroHeight], [80, 0]);
+  const heroOpacity = useTransform(scrollY, [0, heroHeight], [1, 0]);
   const reduceMotion = useReducedMotion();
 
   return (
@@ -252,11 +256,14 @@ export default function Home() {
         </nav>
       </header>
 
+      {/* Scroll reveal wrapper: hero + clients share one parent, so the sticky hero can sit UNDER the sliding card, then scroll away with the wrapper once the card has covered it. */}
+      <div className="relative">
       {/* Hero — full viewport, centred */}
-      <section
+      <motion.section
         ref={heroRef}
         id="top"
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
+        style={{ opacity: reduceMotion ? 1 : heroOpacity }}
+        className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
         {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
             this video is notenemyok.com's asset, not NexusFX's.
@@ -296,10 +303,10 @@ export default function Home() {
         <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
         </p>
-      </section>
+      </motion.section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
-      <section id="clients" className="relative z-10 w-full px-2 pb-24 sm:px-4">
+      <section id="clients" className="relative z-20 w-full px-2 pb-24 sm:px-4">
         <motion.div style={{ y: reduceMotion ? 0 : cardY }} className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
@@ -428,6 +435,7 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+      </div>
 
       {/* Hire — rebuilt, NOT the old card: a TextLoop wave ribbon
           (with a crossing second band + scroll boost) plus a
