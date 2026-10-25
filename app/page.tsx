@@ -11,16 +11,19 @@ import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 // all copy below is written for NexusFX, and the animation / hover
 // code here is original.
 //
-// PLACEHOLDER content for now, as asked ("random info"): the creator
-// names and video titles are fictional placeholders, NOT real NexusFX
-// clients or videos. Replace them with real ones before publishing.
+// Creators are now real (from v1, see CLIENTS). Video titles below
+// are still fictional placeholders, NOT real NexusFX videos.
+// Replace them with real ones before publishing.
+// Real NexusFX creators, copied from v1 (components/about.tsx):
+// logos are the channels' official YouTube avatars, copied from
+// v1 public/creators/ into v2 public/creators/. No longer fictional.
 const CLIENTS = [
-  { name: "PixelPlay", initial: "P", gradient: "from-fuchsia-500 to-purple-600" },
-  { name: "GameVault", initial: "G", gradient: "from-sky-500 to-blue-600" },
-  { name: "LootLab", initial: "L", gradient: "from-amber-400 to-orange-500" },
-  { name: "NoScope", initial: "N", gradient: "from-emerald-400 to-teal-600" },
-  { name: "Respawn", initial: "R", gradient: "from-rose-500 to-red-600" },
-  { name: "ClutchCast", initial: "C", gradient: "from-violet-500 to-indigo-600" },
+  { name: "GamerFleet", logo: "/creators/gamerfleet.jpg", url: "https://www.youtube.com/@GamerFleet" },
+  { name: "I. M. Bixu", logo: "/creators/imbixu.jpg", url: "https://www.youtube.com/@imbixu" },
+  { name: "BeckBros", logo: "/creators/beckbros.jpg", url: "https://www.youtube.com/@beckbros" },
+  { name: "BeckBroBlox", logo: "/creators/beckbroblox.jpg", url: "https://www.youtube.com/@BeckBroBlox" },
+  { name: "SarahGrace", logo: "/creators/sarahgrace.jpg", url: "https://www.youtube.com/@TheSarahGrace" },
+  { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", url: "https://www.youtube.com/@AyushBhandari" },
 ] as const;
 
 const VIDEOS = [
@@ -107,27 +110,20 @@ export default function Home() {
         id="top"
         className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
-        {/* Hero-only matte metal card overlay: clearly a different
-            card from the black page background. Matte finish = low
-            shine, muted zinc metal, not glossy. Other sections are
-            NOT changed by this. */}
-        <div className="relative w-full max-w-5xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 px-6 py-16 text-center shadow-2xl ring-1 ring-zinc-400/30 sm:px-12 sm:py-20">
-          {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
-              this video is notenemyok.com's asset, not NexusFX's.
-              It is hotlinked (not copied into the repo) for preview
-              only, as the user asked, and must be replaced with
-              NexusFX's own hero video before any publish. */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
-            src="https://www.notenemyok.com/VIDS/background%20video.mp4"
-          />
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/40" />
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-black/30" />
-          <span aria-hidden="true" className="absolute left-8 right-8 top-0 h-px bg-white/20" />
+        {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
+            this video is notenemyok.com's asset, not NexusFX's.
+            It is hotlinked (not copied into the repo) for preview
+            only, as the user asked, and must be replaced with
+            NexusFX's own hero video before any publish. */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+          src="https://www.notenemyok.com/VIDS/background%20video.mp4"
+        />
+        <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/40" />
         <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
@@ -161,15 +157,14 @@ export default function Home() {
         >
           Watch the work <ArrowUpRight size={18} weight="Filled" />
         </a>
-        </div>
         <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
         </p>
       </section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
-      <section id="clients" className="px-4 pb-24">
-        <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[2.5rem] bg-zinc-900 p-8 ring-1 ring-zinc-300/20 sm:p-12">
+      <section id="clients" className="w-full px-2 pb-24 sm:px-4">
+        <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
@@ -179,26 +174,31 @@ export default function Home() {
             Creators I&apos;ve worked with
           </h2>
           <div
-            className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3"
+            className="relative mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6"
             onMouseLeave={() => setFeaturedClient(0)}
           >
             {CLIENTS.map((client, index) => {
               const featured = featuredClient === index;
               return (
-                <div
+                <a
                   key={client.name}
+                  href={client.url}
+                  target="_blank"
+                  rel="noreferrer"
                   onMouseEnter={() => setFeaturedClient(index)}
-                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-gradient-to-br ${client.gradient} shadow-lg ring-1 ring-zinc-300/40 transition-all duration-300 ${
+                  className={`relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-all duration-300 ${
                     featured
                       ? "z-10 scale-110 ring-2 ring-white/80 shadow-2xl"
                       : "scale-100"
                   }`}
                 >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-full w-full object-cover"
+                  />
                   {/* Metal shine: bright top-left sweep over the tile */}
                   <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
-                  <span className="relative flex h-full w-full items-center justify-center text-4xl font-black">
-                    {client.initial}
-                  </span>
                   {/* Name pill: only on the featured tile, bottom centre */}
                   <span
                     className={`absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black px-3 py-1 font-mono text-xs text-white transition-opacity duration-300 ${
@@ -207,7 +207,7 @@ export default function Home() {
                   >
                     {client.name}
                   </span>
-                </div>
+                </a>
               );
             })}
           </div>
