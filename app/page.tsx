@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import TextLoop from "@/components/TextLoop";
 import TargetCursor from "@/components/TargetCursor";
@@ -141,6 +142,36 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll-linked hero zoom-out + card slide-up:
+  // - Hero is sticky, so it stays pinned while the clients card
+  //   scrolls up OVER it (hero goes "under" the card).
+  // - As the page scrolls one hero-height, the hero scales down
+  //   1 -> 0.82 and fades 1 -> 0.25: a zoom-out, not a slide-away.
+  // - The metal card itself starts 80px low and eases up to 0,
+  //   so it slides up over the shrinking hero.
+  // - A soft spring (low stiffness) on scrollY makes it all
+  //   lazy/smooth instead of snapping to the scroll position.
+  // - Hero + clients share one wrapper below, so once the card
+  //   has covered the hero, the sticky hero scrolls away with
+  //   that wrapper instead of staying stuck behind the hire
+  //   section. Reduced-motion users get no scale/fade/slide.
+  const heroRef = useRef<HTMLElement>(null);
+  const [heroHeight, setHeroHeight] = useState(800);
+  useEffect(() => {
+    const measure = () => {
+      if (heroRef.current) setHeroHeight(heroRef.current.offsetHeight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+  const { scrollY } = useScroll();
+  const smoothScrollY = useSpring(scrollY, { stiffness: 55, damping: 20, mass: 1 });
+  const heroScale = useTransform(smoothScrollY, [0, heroHeight], [1, 0.82]);
+  const heroOpacity = useTransform(smoothScrollY, [0, heroHeight * 0.7, heroHeight], [1, 0.55, 0.25]);
+  const cardY = useTransform(smoothScrollY, [0, heroHeight], [80, 0]);
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
       <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn cursorColor="#ffffff" cursorColorOnTarget="#a3e635" />
@@ -225,10 +256,17 @@ export default function Home() {
         </nav>
       </header>
 
+      {/* Scroll reveal wrapper: hero + clients share one parent, so the sticky hero can sit UNDER the sliding card, then scroll away with the wrapper once the card has covered it. */}
+      <div className="relative">
       {/* Hero — full viewport, centred */}
-      <section
+      <motion.section
+        ref={heroRef}
         id="top"
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
+        style={{
+          scale: reduceMotion ? 1 : heroScale,
+          opacity: reduceMotion ? 1 : heroOpacity,
+        }}
+        className="sticky top-0 z-0 flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
         {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
             this video is notenemyok.com's asset, not NexusFX's.
@@ -268,11 +306,11 @@ export default function Home() {
         <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
         </p>
-      </section>
+      </motion.section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
-      <section id="clients" className="relative z-10 w-full px-2 pb-24 sm:px-4">
-        <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
+      <section id="clients" className="relative z-20 w-full px-2 pb-24 sm:px-4">
+        <motion.div style={{ y: reduceMotion ? 0 : cardY }} className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
@@ -398,8 +436,9 @@ export default function Home() {
             <span>+</span>
             <span>NEXUSFX · 2026</span>
           </div>
-        </div>
+        </motion.div>
       </section>
+      </div>
 
       {/* Hire — rebuilt, NOT the old card: a TextLoop wave ribbon
           (with a crossing second band + scroll boost) plus a
