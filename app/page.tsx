@@ -40,10 +40,30 @@ const VIDEOS = [
   { id: "HsMemCsMGyc", title: "I Tried Every Celebrity Experience!", creator: "Ayush Bhandari", creatorUrl: "https://www.youtube.com/@AyushBhandari", creatorLogo: "/creators/ayushbhandari.jpg" },
 ] as const;
 
+const HIRE_SPARKLES = [
+  { dx: -140, dy: -110, size: 12, color: "#000000", round: false },
+  { dx: -90, dy: -150, size: 8, color: "#f7078e", round: true },
+  { dx: 0, dy: -170, size: 14, color: "#ffffff", round: false },
+  { dx: 90, dy: -150, size: 8, color: "#000000", round: true },
+  { dx: 140, dy: -110, size: 12, color: "#a855f7", round: false },
+  { dx: 170, dy: -40, size: 10, color: "#f7078e", round: false },
+  { dx: 170, dy: 40, size: 8, color: "#ffffff", round: true },
+  { dx: 140, dy: 110, size: 12, color: "#000000", round: false },
+  { dx: 90, dy: 150, size: 8, color: "#a855f7", round: true },
+  { dx: 0, dy: 170, size: 14, color: "#f7078e", round: false },
+  { dx: -90, dy: 150, size: 8, color: "#ffffff", round: true },
+  { dx: -140, dy: 110, size: 12, color: "#a855f7", round: false },
+  { dx: -170, dy: 40, size: 10, color: "#000000", round: true },
+  { dx: -170, dy: -40, size: 8, color: "#f7078e", round: false },
+] as const;
+
 export default function Home() {
   // Featured client tile: first tile at rest, transfers to the tile
   // under the cursor on hover, and returns when the cursor leaves.
   const [featuredClient, setFeaturedClient] = useState(0);
+  // Hire click burst: increments on every Hire me click, used as
+  // the burst key so the animation replays each time.
+  const [hireBurst, setHireBurst] = useState(0);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   // Navbar, two states like the reference screenshots:
@@ -334,7 +354,7 @@ export default function Home() {
               @nexu.fx4
             </a>
           </div>
-          <div className="rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
+          <div className="relative rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
             <div className="relative inline-block border-2 border-black/25 px-6 py-4">
               <span className="absolute -left-2 -top-2 h-3 w-3 bg-black" />
               <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
@@ -348,10 +368,35 @@ export default function Home() {
             </div>
             <a
               href="mailto:nexusfx.media@gmail.com"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 hover:bg-pink-500 hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
+              onClick={() => setHireBurst((b) => b + 1)}
+              className="relative z-10 mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 hover:bg-pink-500 hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
             >
               Hire me <ArrowUpRight size={18} weight="Filled" />
             </a>
+            {hireBurst > 0 ? (
+              <div key={hireBurst} aria-hidden="true" className="v2-hire-burst pointer-events-none absolute inset-0 z-20">
+                <div className="v2-hire-glow absolute inset-0 rounded-[1.5rem] ring-4 ring-[#f7078e]" />
+                {HIRE_SPARKLES.map((s, i) => (
+                  <span
+                    key={i}
+                    className="v2-spark-burst absolute"
+                    style={
+                      {
+                        left: "50%",
+                        top: "72%",
+                        width: s.size,
+                        height: s.size,
+                        backgroundColor: s.color,
+                        borderRadius: s.round ? "50%" : 2,
+                        animationDelay: `${i * 0.02}s`,
+                        "--dx": `${s.dx}px`,
+                        "--dy": `${s.dy}px`,
+                      } as React.CSSProperties
+                    }
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
           <div className="flex flex-col items-center justify-between gap-4 px-4 py-5 text-black sm:flex-row">
             <a
