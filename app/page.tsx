@@ -107,6 +107,13 @@ export default function Home() {
         id="top"
         className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
+        {/* Hero-only matte metal card overlay: clearly a different
+            card from the black page background. Matte finish = low
+            shine, muted zinc metal, not glossy. Other sections are
+            NOT changed by this. */}
+        <div className="relative w-full max-w-5xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 px-6 py-16 text-center shadow-2xl ring-1 ring-zinc-400/30 sm:px-12 sm:py-20">
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-black/30" />
+          <span aria-hidden="true" className="absolute left-8 right-8 top-0 h-px bg-white/20" />
         <div className="group v2-fade-up relative -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
@@ -129,18 +136,19 @@ export default function Home() {
             edits that hold attention
           </p>
         </div>
-        <p className="v2-fade-up mt-8 max-w-md text-base text-white/70" style={{ animationDelay: "0.15s" }}>
+        <p className="v2-fade-up relative mt-8 max-w-md text-base text-white/70" style={{ animationDelay: "0.15s" }}>
           Video editor for YouTubers and gaming creators. Hooks that land,
           pacing that keeps people watching to the end.
         </p>
         <a
           href="#videos"
-          className="v2-fade-up v2-glow-pulse mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:bg-lime-300"
+          className="v2-fade-up v2-glow-pulse relative mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:bg-lime-300"
           style={{ animationDelay: "0.3s" }}
         >
           Watch the work <ArrowUpRight size={18} weight="Filled" />
         </a>
-        <p className="v2-bounce-soft absolute bottom-6 font-mono text-xs text-white/50">
+        </div>
+        <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
         </p>
       </section>
