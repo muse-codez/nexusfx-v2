@@ -139,6 +139,27 @@ body {
   animation: v2-shine-sweep 1s cubic-bezier(0.2, 0.8, 0.2, 1) 2;
 }
 
+/* Writing animation on the hero title, on hover only: the title
+   reveals left-to-right in 7 steps (one per letter of NexusFX),
+   like it is being written. Clip-path is used so the gradient
+   text and layout do not shift during the reveal. */
+.v2-write {
+  white-space: nowrap;
+}
+
+@keyframes v2-write {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.group:hover .v2-write {
+  animation: v2-write 1.4s steps(7, end) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
@@ -149,6 +170,9 @@ body {
   }
   .group:hover .v2-shine-beam,
   .v2-shine-wrap:hover .v2-shine-beam {
+    animation: none;
+  }
+  .group:hover .v2-write {
     animation: none;
   }
 }

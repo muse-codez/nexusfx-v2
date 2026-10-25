@@ -141,7 +141,7 @@ export default function Home() {
             NEXUSFX
           </span>
           <span className="relative inline-block overflow-hidden">
-            <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-[clamp(4rem,16vw,11rem)] font-extrabold leading-none tracking-tight text-transparent">
+            <h1 className="v2-write v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight text-transparent">
               NexusFX
             </h1>
             <span aria-hidden="true" className="v2-shine-beam" />
@@ -150,17 +150,6 @@ export default function Home() {
             edits that hold attention
           </p>
         </div>
-        <p className="v2-fade-up relative mt-8 max-w-md text-base text-white/70" style={{ animationDelay: "0.15s" }}>
-          Video editor for YouTubers and gaming creators. Hooks that land,
-          pacing that keeps people watching to the end.
-        </p>
-        <a
-          href="#videos"
-          className="v2-fade-up v2-glow-pulse relative mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:bg-lime-300"
-          style={{ animationDelay: "0.3s" }}
-        >
-          Watch the work <ArrowUpRight size={18} weight="Filled" />
-        </a>
         <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
           scroll ↓
         </p>
