@@ -340,8 +340,8 @@ export default function Home() {
           (with a crossing second band + scroll boost) plus a
           pulsing availability badge, and contact as two large
           tiles instead of the old pill row. */}
-      <section id="hire" className="relative z-10 px-4 pb-24">
-        <div className="mx-auto max-w-5xl text-center">
+      <section id="hire" className="relative z-10 pb-24">
+        <div className="mx-auto max-w-5xl px-4 text-center">
           {/* Fancy extra 1: live availability badge with a pulsing dot */}
           <p className="mx-auto flex w-fit items-center gap-2 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-lime-300 ring-1 ring-lime-400/40">
             <span className="relative flex h-2 w-2">
@@ -350,6 +350,9 @@ export default function Home() {
             </span>
             Available for new projects
           </p>
+        </div>
+        {/* Edge-to-edge loop: full viewport width, no container. */}
+        <div className="w-full">
           <TextLoop
             text="HIRE ME"
             shape="wave"
@@ -366,7 +369,7 @@ export default function Home() {
             ribbonColor="#a3e635"
             color="#000000"
             ribbonWidth={86}
-            edgeFade={0.5}
+            edgeFade={0}
             cross
             crossAngle={16}
             scrollBoost={0.6}
@@ -374,6 +377,8 @@ export default function Home() {
             className="mt-4"
             style={{ fontFamily: "var(--font-pixelify), monospace" }}
           />
+        </div>
+        <div className="mx-auto max-w-5xl px-4 text-center">
           <p className="mt-2 font-mono text-xs text-white/50">
             Scroll — the loop speeds up. Hover it — it eases to a stop.
           </p>
