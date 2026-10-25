@@ -106,12 +106,49 @@ body {
   animation: v2-bounce-soft 1.6s ease-in-out infinite;
 }
 
+/* Shine sweep, original implementation of the pattern from the
+   breakdown: a skewed white strip that sweeps left-to-right twice
+   on hover of its parent (.group or .v2-shine-wrap). */
+.v2-shine-beam {
+  position: absolute;
+  top: 0;
+  left: -140%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+@keyframes v2-shine-sweep {
+  0% {
+    left: -140%;
+  }
+  100% {
+    left: 170%;
+  }
+}
+
+.group:hover .v2-shine-beam,
+.v2-shine-wrap:hover .v2-shine-beam {
+  animation: v2-shine-sweep 1s cubic-bezier(0.2, 0.8, 0.2, 1) 2;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
   .v2-glow-pulse,
   .v2-gradient-text,
   .v2-bounce-soft {
+    animation: none;
+  }
+  .group:hover .v2-shine-beam,
+  .v2-shine-wrap:hover .v2-shine-beam {
     animation: none;
   }
 }

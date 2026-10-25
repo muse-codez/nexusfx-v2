@@ -94,9 +94,9 @@ export default function Home() {
             </a>
             <a
               href="#hire"
-              className="rounded-full bg-lime-400 px-3 py-1 font-semibold text-black transition hover:bg-pink-500 hover:text-white hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
+              className="v2-shine-wrap relative overflow-hidden rounded-full bg-lime-400 px-3 py-1 font-semibold text-black transition hover:bg-pink-500 hover:text-white hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
             >
-              hire me
+              hire me <span aria-hidden="true" className="v2-shine-beam" />
             </a>
           </div>
         </nav>
@@ -107,14 +107,24 @@ export default function Home() {
         id="top"
         className="relative flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
-        <div className="v2-fade-up relative -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
+        <div className="group v2-fade-up relative -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -bottom-2 -left-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -bottom-2 -right-2 h-4 w-4 bg-lime-400" />
-          <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-6xl font-extrabold leading-none tracking-tight text-transparent sm:text-8xl">
-            NexusFX
-          </h1>
+          <span className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
+          <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
+          <span className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
+          <span className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
+          <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
+            NEXUSFX
+          </span>
+          <span className="relative inline-block overflow-hidden">
+            <h1 className="v2-gradient-text bg-gradient-to-r from-lime-300 via-pink-400 to-lime-300 bg-clip-text font-pixelify text-6xl font-extrabold leading-none tracking-tight text-transparent sm:text-8xl">
+              NexusFX
+            </h1>
+            <span aria-hidden="true" className="v2-shine-beam" />
+          </span>
           <p className="mt-6 font-minecraft text-sm leading-relaxed text-lime-300 sm:text-base">
             edits that hold attention
           </p>
@@ -137,8 +147,13 @@ export default function Home() {
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
       <section id="clients" className="px-4 pb-24">
-        <div className="mx-auto max-w-3xl rounded-[2.5rem] bg-zinc-900 p-8 ring-1 ring-zinc-300/20 sm:p-12">
-          <h2 className="text-center font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
+        <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[2.5rem] bg-zinc-900 p-8 ring-1 ring-zinc-300/20 sm:p-12">
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+          <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
+          <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
+          <span aria-hidden="true" className="absolute bottom-3 left-4 text-sm text-white/30">✦</span>
+          <span aria-hidden="true" className="absolute bottom-3 right-4 text-sm text-white/30">✦</span>
+          <h2 className="relative text-center font-pixelify text-2xl leading-relaxed tracking-wide sm:text-3xl">
             Creators I&apos;ve worked with
           </h2>
           <div
@@ -174,6 +189,11 @@ export default function Home() {
               );
             })}
           </div>
+          <div className="relative mt-10 flex items-center justify-between border-t border-white/10 pt-4 font-mono text-[10px] text-white/50">
+            <span>CLIENTS · 06</span>
+            <span>+</span>
+            <span>NEXUSFX · 2026</span>
+          </div>
         </div>
       </section>
 
@@ -202,7 +222,7 @@ export default function Home() {
                 <span className="absolute bottom-3 left-3 max-w-[70%] rounded-full bg-black/70 px-3 py-1 text-left font-mono text-[11px] leading-snug text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {video.title}
                 </span>
-                <span className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white ring-1 ring-white/60 transition duration-300 hover:scale-110 hover:bg-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)] hover:ring-pink-400">
+                <span className="absolute bottom-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-black text-white ring-1 ring-white/60 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.18] hover:bg-[#f7078e] hover:shadow-[0_0_20px_rgba(247,7,142,0.85)] hover:ring-white">
                   <Play size={20} weight="Filled" />
                 </span>
               </div>
@@ -214,12 +234,27 @@ export default function Home() {
       {/* Hire — closing panel */}
       <section id="hire" className="px-4 pb-16">
         <div className="v2-float mx-auto max-w-3xl rounded-[2.5rem] bg-gradient-to-br from-zinc-100 via-zinc-300 to-zinc-500 p-3 shadow-xl ring-1 ring-white/60 sm:p-4">
+          <div className="flex items-center justify-between px-4 py-3 font-mono text-xs text-black/70">
+            <span className="font-bold text-black">NexusFX — Video Editor</span>
+            <a
+              href="https://www.instagram.com/nexu.fx4"
+              className="rounded-full bg-white px-4 py-1 font-semibold text-black/60 transition hover:text-blue-700"
+            >
+              @nexu.fx4
+            </a>
+          </div>
           <div className="rounded-[1.5rem] bg-lime-400 px-8 py-12 text-center text-black sm:py-16">
-            <h2 className="font-pixelify text-4xl font-bold leading-tight sm:text-6xl">
-              Let&apos;s build your
-              <br />
-              next video.
-            </h2>
+            <div className="relative inline-block border-2 border-black/25 px-6 py-4">
+              <span className="absolute -left-2 -top-2 h-3 w-3 bg-black" />
+              <span className="absolute -right-2 -top-2 h-3 w-3 bg-black" />
+              <span className="absolute -bottom-2 -left-2 h-3 w-3 bg-black" />
+              <span className="absolute -bottom-2 -right-2 h-3 w-3 bg-black" />
+              <h2 className="font-pixelify text-4xl font-bold leading-tight sm:text-6xl">
+                Let&apos;s build your
+                <br />
+                next video.
+              </h2>
+            </div>
             <a
               href="mailto:nexusfx.media@gmail.com"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:scale-105 hover:bg-pink-500 hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
