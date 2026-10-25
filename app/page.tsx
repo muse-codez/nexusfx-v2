@@ -45,18 +45,18 @@ export default function Home() {
   const [featuredClient, setFeaturedClient] = useState(0);
   const [playingId, setPlayingId] = useState<string | null>(null);
 
-  // Navbar: hidden while the hero is on screen, appears smoothly
-  // once the user scrolls past it. All links (home / clients /
-  // videos / hire me) stay visible in the pill when it appears —
-  // nothing is collapsed into a menu.
-  const [navVisible, setNavVisible] = useState(false);
+  // Navbar, two states like the reference screenshots:
+  // - Without scroll: flat, no pill container, just brand + links
+  //   on the page background, home as a blue pill, hire as a
+  //   pink/maroon pill, all links always visible.
+  // - After scroll: the same bar becomes a dark rounded pill
+  //   container (blur + shadow + ring).
+  // This replaces the earlier "hidden on hero" rule.
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 40);
-      setNavVisible(y > 100);
+      setScrolled(window.scrollY > 100);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -88,36 +88,36 @@ export default function Home() {
           intro
         />
       </div>
-      {/* Smooth pill nav: no border, no ring, no outline — shadow
-          and blur only, slides away on scroll down, back on scroll up. */}
       <header
-        className={`fixed inset-x-0 top-4 z-50 flex justify-center px-4 transition-all duration-500 ease-out ${
-          navVisible ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0 pointer-events-none"
+        className={`fixed z-50 transition-all duration-500 ease-out ${
+          scrolled ? "inset-x-4 top-4" : "inset-x-0 top-0 px-6 py-4"
         }`}
       >
         <nav
-          className={`flex w-full max-w-2xl items-center justify-between rounded-full px-5 py-3 shadow-xl shadow-black/40 backdrop-blur-xl transition-colors duration-500 ${
-            scrolled ? "bg-black/80" : "bg-black/60"
+          className={`flex w-full items-center justify-between transition-all duration-500 ${
+            scrolled
+              ? "rounded-full bg-black/80 px-5 py-3 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-xl"
+              : "bg-transparent px-0 py-1"
           }`}
         >
           <a href="#top" className="font-pixelify text-xl font-extrabold tracking-tight">
             NexusFX
           </a>
           <div className="flex items-center gap-1 font-mono text-xs sm:gap-2 sm:text-sm">
-            <a href="#top" className="rounded-full px-3 py-1 text-white/70 transition hover:bg-white/10 hover:text-white">
+            <a href="#top" className="rounded bg-[#3884ff] px-3 py-1 font-semibold text-white transition hover:bg-[#4a90ff]">
               home
             </a>
-            <a href="#clients" className="rounded-full px-3 py-1 text-white/70 transition hover:bg-white/10 hover:text-white">
+            <a href="#clients" className="rounded-full px-3 py-1 text-white transition hover:bg-white/10">
               clients
             </a>
-            <a href="#videos" className="rounded-full px-3 py-1 text-white/70 transition hover:bg-white/10 hover:text-white">
+            <a href="#videos" className="rounded-full px-3 py-1 text-white transition hover:bg-white/10">
               videos
             </a>
             <a
               href="#hire"
-              className="v2-shine-wrap relative overflow-hidden rounded-full bg-lime-400 px-3 py-1 font-semibold text-black transition hover:bg-pink-500 hover:text-white hover:shadow-[0_0_24px_rgba(236,72,153,0.7)]"
+              className="v2-shine-wrap relative overflow-hidden rounded bg-[#5b1a3a] px-3 py-1 font-semibold text-white ring-1 ring-pink-500/60 transition hover:bg-pink-600"
             >
-              hire me <span aria-hidden="true" className="v2-shine-beam" />
+              hire <span aria-hidden="true" className="v2-shine-beam" />
             </a>
           </div>
         </nav>
@@ -138,10 +138,10 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-100"
           src="https://www.notenemyok.com/VIDS/background%20video.mp4"
         />
-        <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-black/40" />
+        <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/20" />
         <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
           <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
           <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
