@@ -145,7 +145,7 @@ body {
    text and layout do not shift during the reveal. */
 /* Wobble on the hero title: a gentle, continuous side-to-side
    rock (only ±1.5°, so it stays readable), on the title wrapper
-   so the writing reveal and gradient are unaffected. */
+   so the title stays readable. */
 @keyframes v2-wobble {
   0%,
   100% {
@@ -214,9 +214,6 @@ body {
   }
   .group:hover .v2-shine-beam,
   .v2-shine-wrap:hover .v2-shine-beam {
-    animation: none;
-  }
-  .group:hover .v2-write {
     animation: none;
   }
   .v2-wobble {
