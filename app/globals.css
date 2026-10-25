@@ -181,12 +181,34 @@ body {
   animation: v2-wobble 3s ease-in-out infinite;
 }
 
+
+/* Intro loader: logo flips (rotateY) while zooming in. */
+@keyframes v2-intro-flip-zoom {
+  0% {
+    transform: rotateY(0deg) scale(0.3);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(360deg) scale(1.15);
+    opacity: 1;
+  }
+}
+
+.v2-intro-flip-zoom {
+  animation: v2-intro-flip-zoom 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-style: preserve-3d;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
   .v2-glow-pulse,
   .v2-gradient-text,
-  .v2-bounce-soft {
+  .v2-bounce-soft,
+  .v2-intro-flip-zoom {
     animation: none;
   }
   .group:hover .v2-shine-beam,

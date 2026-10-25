@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import DotField from "@/components/DotField";
+import IntroLoader from "@/components/IntroLoader";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
 // notenemyok.com (pill nav, full-height hero, clients panel, video grid,
@@ -78,6 +79,9 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-black font-sans text-white">
+      {/* Intro loader: black screen, flipping zoom-in logo, then
+          fades away to reveal this page rendered underneath. */}
+      <IntroLoader />
       {/* Main background: React Bits DotField, fixed behind all
           content. Interactive (cursor lens + glow) via window
           pointer events, so it works even though content sits
