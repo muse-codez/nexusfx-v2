@@ -269,11 +269,13 @@ export default function Home() {
         style={{ opacity: reduceMotion ? 1 : heroOpacity }}
         className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center text-center"
       >
-        {/* Hero card, edge to edge: full viewport width, 85vh tall,
-            so the FaultyTerminal background shows above and below
-            it. The showreel video and the title both sit inside
-            this card — title over the video, as the user picked. */}
-        <div className="relative flex h-[85vh] min-h-[560px] w-full flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-zinc-400/30">
+        {/* Hero card, edge to edge, covering the full hero area
+            like the reference: full viewport width AND full
+            viewport height, so no background strip shows above
+            or below it. The showreel video and the title both
+            sit inside this card — title over the video, as the
+            user picked. */}
+        <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-zinc-400/30">
           {/* Hero video: NexusFX showreel, user-supplied R2 link.
               Hotlinked (not copied into the repo). */}
           <video
