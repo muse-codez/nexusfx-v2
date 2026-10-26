@@ -479,12 +479,6 @@ export default function Home() {
           />
         </div>
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <p className="mt-2 font-mono text-xs text-white/50">
-            Scroll — the loop speeds up. Hover it — it eases to a stop.
-          </p>
-          <p className="mx-auto mt-6 max-w-xl text-white/80">
-            Got a video that needs to hit different? Send the idea, and NexusFX cuts it into something people actually finish.
-          </p>
           {/* Contact, redesigned with the frontend-design +
               interaction-design skills: no longer two identical
               SaaS-style cards. Email is the primary action, so it
