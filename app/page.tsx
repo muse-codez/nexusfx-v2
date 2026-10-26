@@ -26,12 +26,12 @@ import IntroLoader from "@/components/IntroLoader";
 // YouTube page on 2026-10-25. Counts drift as channels grow, so
 // refresh them from the channel pages if they start looking stale.
 const CLIENTS = [
-  { name: "GamerFleet", logo: "/creators/gamerfleet.jpg", pixelLogo: "/creators-pixel/gamerfleet-pixel.png", url: "https://www.youtube.com/@GamerFleet", subs: "6.05M subscribers", desc: "Indian gaming creator — Minecraft, Lilyville series" },
-  { name: "I. M. Bixu", logo: "/creators/imbixu.jpg", pixelLogo: "/creators-pixel/imbixu-pixel.png", url: "https://www.youtube.com/@imbixu", subs: "4.46M subscribers", desc: "Gaming creator — horror & gameplay, “To Make You Smile!”" },
-  { name: "BeckBros", logo: "/creators/beckbros.jpg", pixelLogo: "/creators-pixel/beckbros-pixel.png", url: "https://www.youtube.com/@beckbros", subs: "698K subscribers", desc: "IRL channel — funny videos & challenges with friends" },
-  { name: "BeckBroBlox", logo: "/creators/beckbroblox.jpg", pixelLogo: "/creators-pixel/beckbroblox-pixel.png", url: "https://www.youtube.com/@BeckBroBlox", subs: "158K subscribers", desc: "Roblox gameplay" },
-  { name: "SarahGrace", logo: "/creators/sarahgrace.jpg", pixelLogo: "/creators-pixel/sarahgrace-pixel.png", url: "https://www.youtube.com/@TheSarahGrace", subs: "3.76M subscribers", desc: "Tech, unboxing & fun — iPhone / Apple" },
-  { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", pixelLogo: "/creators-pixel/ayushbhandari-pixel.png", url: "https://www.youtube.com/@AyushBhandari", subs: "6.74M subscribers", desc: "Experience & challenge videos" },
+  { name: "GamerFleet", logo: "/creators/gamerfleet.jpg", url: "https://www.youtube.com/@GamerFleet", subs: "6.05M subscribers", desc: "Indian gaming creator — Minecraft, Lilyville series" },
+  { name: "I. M. Bixu", logo: "/creators/imbixu.jpg", url: "https://www.youtube.com/@imbixu", subs: "4.46M subscribers", desc: "Gaming creator — horror & gameplay, “To Make You Smile!”" },
+  { name: "BeckBros", logo: "/creators/beckbros.jpg", url: "https://www.youtube.com/@beckbros", subs: "698K subscribers", desc: "IRL channel — funny videos & challenges with friends" },
+  { name: "BeckBroBlox", logo: "/creators/beckbroblox.jpg", url: "https://www.youtube.com/@BeckBroBlox", subs: "158K subscribers", desc: "Roblox gameplay" },
+  { name: "SarahGrace", logo: "/creators/sarahgrace.jpg", url: "https://www.youtube.com/@TheSarahGrace", subs: "3.76M subscribers", desc: "Tech, unboxing & fun — iPhone / Apple" },
+  { name: "Ayush Bhandari", logo: "/creators/ayushbhandari.jpg", url: "https://www.youtube.com/@AyushBhandari", subs: "6.74M subscribers", desc: "Experience & challenge videos" },
 ] as const;
 
 // Showcase videos copied from v1 (components/showcase.tsx):
@@ -358,8 +358,7 @@ export default function Home() {
                   }`}
                 >
                   <img
-                    src={client.pixelLogo}
-                    style={{ imageRendering: "pixelated" }}
+                    src={client.logo}
                     alt={client.name}
                     className="h-full w-full object-cover" 
                   />
