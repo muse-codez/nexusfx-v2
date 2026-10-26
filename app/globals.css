@@ -221,6 +221,19 @@ body {
   animation: v2-nav-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Pixel design: stepped 12px corners for the large cards and the
+   scrolled navbar — square, but with an 8-bit step instead of a
+   plain sharp corner. Smaller elements are plain sharp squares. */
+.v2-pixel-corners {
+  clip-path: polygon(
+    0 12px, 12px 12px, 12px 0,
+    calc(100% - 12px) 0, calc(100% - 12px) 12px, 100% 12px,
+    100% calc(100% - 12px), calc(100% - 12px) calc(100% - 12px),
+    calc(100% - 12px) 100%, 12px 100%,
+    12px calc(100% - 12px), 0 calc(100% - 12px)
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
@@ -293,7 +306,6 @@ body {
   background: #fdf3dc;
   color: #2e2a3f;
   border: 2px solid rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
   box-shadow:
     0 16px 28px rgba(0, 0, 0, 0.35),
     inset 3px 3px 8px rgba(255, 255, 255, 0.9),

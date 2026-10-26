@@ -117,7 +117,7 @@ export default function Home() {
   // - Without scroll: flat, no pill container, just brand + links
   //   on the page background, home as a blue pill, hire as a
   //   pink/maroon pill, all links always visible.
-  // - After scroll: the same bar becomes a dark rounded pill
+  // - After scroll: the same bar becomes a dark pixel-corner bar
   //   container (blur + shadow + ring).
   // This replaces the earlier "hidden on hero" rule.
   // Scroll-spy: blue pill = the section actually on screen.
@@ -201,8 +201,8 @@ export default function Home() {
       </div>
       {/* Navbar: at the top it stays flat and transparent, so
           the hero video shows through. Past 80px of scroll it
-          pops in (v2-nav-pop) as a dark glass pill: zinc-900
-          at 80% with blur, ring and shadow, same max-w-3xl
+          pops in (v2-nav-pop) as a dark glass pixel bar: zinc-900
+          at 80% with blur, border and shadow, same max-w-3xl
           width so it does not jump. This supersedes the
           earlier "never a background" state — the user now
           asked for a background on scroll. */}
@@ -210,20 +210,20 @@ export default function Home() {
         <nav
           className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
             scrolled
-              ? "v2-nav-pop rounded-full bg-zinc-900/80 px-4 py-2 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-md"
+              ? "v2-nav-pop v2-pixel-corners bg-zinc-900/80 px-4 py-2 shadow-xl shadow-black/40 border border-white/10 backdrop-blur-md"
               : "bg-transparent px-2 py-1"
           }`}
         >
           <a href="#top" data-cursor-label="Top" className="cursor-target flex items-center gap-2 transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 rounded-full object-cover" />
+            <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 object-cover" />
             <span className="font-pixelify text-xl font-bold text-lime-400">NexusFX</span>
           </a>
           <div className="flex items-center gap-1 font-pixelify text-xs uppercase sm:gap-2 sm:text-sm">
             <a
               href="#top"
               data-cursor-label="Home"
-              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
+              className={`cursor-target px-4 py-1 transition-all duration-300 ${
                 active === "top"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -234,7 +234,7 @@ export default function Home() {
             <a
               href="#clients"
               data-cursor-label="Clients"
-              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
+              className={`cursor-target px-4 py-1 transition-all duration-300 ${
                 active === "clients"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -245,7 +245,7 @@ export default function Home() {
             <a
               href="#videos"
               data-cursor-label="Videos"
-              className={`cursor-target rounded-full px-3 py-1 transition-all duration-300 ${
+              className={`cursor-target px-4 py-1 transition-all duration-300 ${
                 active === "videos"
                   ? "bg-[#3884ff] font-bold text-white shadow-[0_0_18px_rgba(56,132,255,0.6)] hover:scale-105"
                   : "text-white/80 hover:scale-105 hover:bg-white/10 hover:text-white"
@@ -256,7 +256,7 @@ export default function Home() {
             <a
               href="#hire"
               data-cursor-label="Hire"
-              className={`cursor-target v2-shine-wrap relative overflow-hidden rounded-full px-3 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
+              className={`cursor-target v2-shine-wrap relative overflow-hidden px-4 py-1 font-bold text-white transition-all duration-300 hover:scale-105 ${
                 active === "hire"
                   ? "bg-[#3884ff] shadow-[0_0_18px_rgba(56,132,255,0.6)]"
                   : "bg-[#5b1a3a] ring-1 ring-pink-500/60 hover:bg-pink-600"
@@ -304,7 +304,7 @@ export default function Home() {
             <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
             <span className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
             <span className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
-            <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
+            <span className="absolute -bottom-5 right-4 bg-lime-400 px-4 py-1 font-mono text-[10px] font-bold text-black">
               NEXUSFX
             </span>
             <span className="v2-wobble relative inline-block px-2 py-4">
@@ -316,7 +316,7 @@ export default function Home() {
               edits that hold attention
             </p>
           </div>
-          <p className="v2-bounce-soft absolute bottom-6 z-10 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
+          <p className="v2-bounce-soft absolute bottom-6 z-10 bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
             scroll ↓
           </p>
         </div>
@@ -324,14 +324,14 @@ export default function Home() {
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
       <section id="clients" className="relative z-20 w-full px-2 pb-24 sm:px-4">
-        <motion.div style={{ y: reduceMotion ? 0 : cardY }} className="relative w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl ring-1 ring-zinc-400/30 sm:p-12">
-          <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+        <motion.div style={{ y: reduceMotion ? 0 : cardY }} className="v2-pixel-corners relative w-full overflow-hidden bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl border border-zinc-400/30 sm:p-12">
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 left-4 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute bottom-3 right-4 text-sm text-white/30">✦</span>
           <h2 className="relative text-center font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
-            <span className="v2-clay-title inline-block px-8 py-3">Creators I&apos;ve worked with</span>
+            <span className="v2-clay-title inline-block px-10 py-3">Creators I&apos;ve worked with</span>
           </h2>
           <div
             className="relative mx-auto mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:w-[46%] lg:grid-cols-3"
@@ -349,7 +349,7 @@ export default function Home() {
                   onMouseEnter={() => setFeaturedClient(index)}
                   onFocus={() => setFeaturedClient(index)}
                   onBlur={() => setFeaturedClient(null)}
-                  className={`cursor-target relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 ${
+                  className={`cursor-target relative aspect-square overflow-hidden bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 ${
                     featured
                       ? "z-10 ring-2 ring-lime-400/80 shadow-[0_0_28px_rgba(163,230,53,0.35)]"
                       : ""
@@ -361,7 +361,7 @@ export default function Home() {
                     className="h-full w-full object-cover" 
                   />
                   {/* Metal shine: bright top-left sweep over the tile */}
-                  <span className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/40 via-white/5 to-black/25" />
                   {/* HUD target-lock: four corner brackets, only on hover */}
                   <span aria-hidden="true" className={`pointer-events-none absolute inset-2 transition-opacity duration-200 ${featured ? "opacity-100" : "opacity-0"}`}>
                     <span className="absolute left-0 top-0 h-5 w-5 border-l-2 border-t-2 border-lime-400" />
@@ -385,7 +385,7 @@ export default function Home() {
                     }`}
                   >
                     <span className="flex items-center gap-1.5 font-pixelify text-sm text-white">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-400" />
+                      <span className="h-1.5 w-1.5 shrink-0 bg-lime-400" />
                       {client.name}
                     </span>
                   </span>
@@ -409,13 +409,13 @@ export default function Home() {
               which now expands to the end of the showcase. */}
           <div id="videos" className="relative mt-16 scroll-mt-24 text-center">
             <h2 className="mt-6 font-pixelify text-5xl font-bold leading-tight tracking-wide sm:text-7xl">
-              <span className="v2-clay-title inline-block px-8 py-3">Recent edits</span>
+              <span className="v2-clay-title inline-block px-10 py-3">Recent edits</span>
             </h2>
           </div>
         <div className="relative mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {VIDEOS.map((video) => (
             <article key={video.id}>
-              <div className="relative aspect-video overflow-hidden rounded-[2rem] bg-black shadow-lg ring-1 ring-zinc-300/40">
+              <div className="relative aspect-video overflow-hidden bg-black shadow-lg ring-1 ring-zinc-300/40">
                 {playingId === video.id ? (
                   <iframe
                     src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
@@ -440,7 +440,7 @@ export default function Home() {
                       className="h-full w-full object-cover transition-opacity duration-300 group-hover:opacity-80"
                     />
                     <span className="absolute inset-0 flex items-center justify-center">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black text-white ring-1 ring-white/60 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.18] group-hover:bg-[#f7078e] group-hover:shadow-[0_0_20px_rgba(247,7,142,0.85)]">
+                      <span className="flex h-14 w-14 items-center justify-center bg-black text-white ring-1 ring-white/60 transition duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-[1.18] group-hover:bg-[#f7078e] group-hover:shadow-[0_0_20px_rgba(247,7,142,0.85)]">
                         <Play size={24} weight="Filled" />
                       </span>
                     </span>
@@ -457,7 +457,7 @@ export default function Home() {
                 data-cursor-label={video.creator}
                 className="cursor-target mt-2 flex items-center gap-2 font-mono text-xs text-white/70 transition hover:text-white"
               >
-                <img src={video.creatorLogo} alt={video.creator} className="h-5 w-5 rounded-full object-cover" />
+                <img src={video.creatorLogo} alt={video.creator} className="h-5 w-5 object-cover" />
                 {video.creator}
               </a>
             </article>
@@ -512,10 +512,10 @@ export default function Home() {
               panel holding the two contact tiles, so hire reads
               as one section instead of floating tiles. No site's
               layout or wording copied; no new copy added. */}
-          <div className="relative mt-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-6 shadow-2xl ring-1 ring-zinc-400/30 sm:p-8">
-            <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+          <div className="v2-pixel-corners relative mt-10 overflow-hidden bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-6 shadow-2xl border border-zinc-400/30 sm:p-8">
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
             <div className="relative grid gap-6 text-left sm:grid-cols-5">
-            <div className="group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60 sm:col-span-3">
+            <div className="group relative overflow-hidden bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60 sm:col-span-3">
               {/* Primary tile: solid zinc at rest, lime fill on
                   hover (no fire, no zoom) with a shine sweep, and
                   text/buttons flip to dark for readability. */}
@@ -529,7 +529,7 @@ export default function Home() {
                 <a
                   href="mailto:nexusfx.media@gmail.com"
                   data-cursor-label="Email"
-                  className="cursor-target rounded-full bg-lime-400 px-6 py-3 text-base font-bold text-black transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black group-hover:text-lime-400"
+                  className="cursor-target bg-lime-400 px-6 py-3 text-base font-bold text-black transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black group-hover:text-lime-400"
                 >
                   Write an email
                 </a>
@@ -541,7 +541,7 @@ export default function Home() {
                     setEmailCopied(true);
                     setTimeout(() => setEmailCopied(false), 2000);
                   }}
-                  className="cursor-target rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20"
+                  className="cursor-target bg-white/10 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/20 transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20"
                 >
                   <span ref={copyLabelRef} className="t-morph">Copy address</span>
                 </button>
@@ -552,7 +552,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               data-cursor-label="Instagram"
-              className="cursor-target group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(247,7,142,0.35)] hover:ring-pink-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 sm:col-span-2"
+              className="cursor-target group relative overflow-hidden bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(247,7,142,0.35)] hover:ring-pink-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 sm:col-span-2"
             >
               {/* Secondary tile: same solid + fill + shine language
                   as email, but pink (not a lime copy), no fire, no
@@ -563,7 +563,7 @@ export default function Home() {
                 <Instagram size={16} weight="Filled" /> Instagram
               </p>
               <p className="relative z-10 mt-3 font-pixelify text-xl text-white transition-colors duration-500 motion-reduce:transition-none group-hover:text-black">@nexu.fx4</p>
-              <span className="relative z-10 mt-6 inline-flex items-center gap-1 rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-pink-400 ring-1 ring-white/20 transition duration-150 group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20">
+              <span className="relative z-10 mt-6 inline-flex items-center gap-1 bg-white/10 px-5 py-2 text-sm font-semibold text-pink-400 ring-1 ring-white/20 transition duration-150 group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20">
                 Visit profile <span className="inline-block transition-transform duration-300 motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><ArrowUpRight size={16} weight="Filled" /></span>
               </span>
             </a>
