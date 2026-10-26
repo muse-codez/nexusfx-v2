@@ -202,6 +202,25 @@ body {
   animation: v2-nav-drop 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Navbar scroll pop: when the background appears on scroll,
+   the bar pops in slightly (0.96 -> 1.02 -> 1) instead of
+   just fading in. */
+@keyframes v2-nav-pop {
+  0% {
+    transform: scale(0.96);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.v2-nav-pop {
+  animation: v2-nav-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .v2-fade-up,
   .v2-float,
@@ -209,7 +228,8 @@ body {
   .v2-gradient-text,
   .v2-bounce-soft,
   .v2-intro-flip,
-  .v2-nav-drop {
+  .v2-nav-drop,
+  .v2-nav-pop {
     animation: none;
   }
   .group:hover .v2-shine-beam,

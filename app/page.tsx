@@ -127,6 +127,7 @@ export default function Home() {
   // 150px from the viewport top (navbar height + margin).
   // Order matters because #videos sits inside #clients.
   const [active, setActive] = useState("top");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -136,6 +137,7 @@ export default function Home() {
         if (el && el.getBoundingClientRect().top <= 150) current = id;
       }
       setActive(current);
+      setScrolled(window.scrollY > 80);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -197,15 +199,21 @@ export default function Home() {
           clickEffect="glitch"
         />
       </div>
-      {/* Navbar width: old centred pill was max-w-2xl, which was
-          good; this is slightly longer at max-w-3xl, same width in
-          both states so it does not jump when scrolling. */}
-      {/* Navbar, always without background: the flat version
-          (no pill container, no blur, no ring, no shadow) at
-          all scroll positions. The scroll pill background was
-          removed at the user's request. */}
+      {/* Navbar: at the top it stays flat and transparent, so
+          the hero video shows through. Past 80px of scroll it
+          pops in (v2-nav-pop) as a dark glass pill: zinc-900
+          at 80% with blur, ring and shadow, same max-w-3xl
+          width so it does not jump. This supersedes the
+          earlier "never a background" state — the user now
+          asked for a background on scroll. */}
       <header className="v2-nav-drop fixed inset-x-0 top-0 z-50 flex justify-center px-4 py-4">
-        <nav className="flex w-full max-w-3xl items-center justify-between bg-transparent px-2 py-1">
+        <nav
+          className={`flex w-full max-w-3xl items-center justify-between transition-all duration-500 ${
+            scrolled
+              ? "v2-nav-pop rounded-full bg-zinc-900/80 px-4 py-2 shadow-xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-md"
+              : "bg-transparent px-2 py-1"
+          }`}
+        >
           <a href="#top" data-cursor-label="Top" className="cursor-target flex items-center gap-2 transition-transform duration-300 hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="NexusFX logo" className="h-8 w-8 rounded-full object-cover" />
