@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "mo
 import { ArrowUpRight, Envelope, Instagram, Play } from "reicon-react";
 import TextLoop from "@/components/TextLoop";
 import TargetCursor from "@/components/TargetCursor";
-import DotField from "@/components/DotField";
+import FaultyTerminal from "@/components/FaultyTerminal";
 import IntroLoader from "@/components/IntroLoader";
 
 // NexusFX v2 — original homepage, inspired in general structure only by
@@ -178,19 +178,23 @@ export default function Home() {
       {/* Intro loader: black screen, flipping zoom-in logo, then
           fades away to reveal this page rendered underneath. */}
       <IntroLoader />
-      {/* Main background: React Bits DotField, fixed behind all
-          content. Interactive (cursor lens + glow) via window
-          pointer events, so it works even though content sits
-          above it. Props are the usage example as given. */}
+      {/* Main background: React Bits FaultyTerminal, fixed behind
+          all content. Props are the usage example as given. */}
       <div aria-hidden="true" className="fixed inset-0 z-0">
-        <DotField
-          gradientFrom="#5227FF"
-          gradientTo="#FF9FFC"
-          dotRadius={1.5}
-          dotSpacing={14}
-          cursorRadius={240}
-          bulgeStrength={0.6}
-          glowRadius={160}
+        <FaultyTerminal
+          tint="#A7EF9E"
+          glyphs="blocks"
+          scale={1.5}
+          digitSize={1.2}
+          timeScale={0.5}
+          brightness={0.75}
+          glow={0.5}
+          persistence={0.5}
+          mouseStrength={0.5}
+          mouseGlow={0.6}
+          curvature={0.1}
+          vignette={0.25}
+          clickEffect="glitch"
         />
       </div>
       {/* Navbar width: old centred pill was max-w-2xl, which was
