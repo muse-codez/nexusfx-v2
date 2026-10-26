@@ -487,16 +487,23 @@ export default function Home() {
           </p>
           {/* Contact, as two large tiles — not the old pill row */}
           <div className="mt-10 grid gap-4 text-left sm:grid-cols-2">
-            <div className="rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15">
-              <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60">
+            <div className="group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-6 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-700 hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60">
+              {/* Solid tile: opaque zinc, so the FaultyTerminal
+                  background can no longer bleed through it. Hover:
+                  a lime fill fades in (no fire, no zoom) with a
+                  shine sweep across it, and the text/buttons flip
+                  to dark so they stay readable on the lime. */}
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-lime-300 via-lime-400 to-lime-500 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+              <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/30 blur-md transition-transform duration-1000 group-hover:translate-x-[400%]" />
+              <p className="relative z-10 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60 transition-colors duration-700 group-hover:text-black/60">
                 <Envelope size={16} weight="Filled" /> Email
               </p>
-              <p className="mt-3 break-all font-pixelify text-lg text-white">nexusfx.media@gmail.com</p>
-              <div className="mt-5 flex gap-2">
+              <p className="relative z-10 mt-3 break-all font-pixelify text-lg text-white transition-colors duration-700 group-hover:text-black">nexusfx.media@gmail.com</p>
+              <div className="relative z-10 mt-5 flex gap-2">
                 <a
                   href="mailto:nexusfx.media@gmail.com"
                   data-cursor-label="Email"
-                  className="cursor-target rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition hover:bg-lime-300"
+                  className="cursor-target rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition group-hover:bg-black group-hover:text-lime-400"
                 >
                   Write an email
                 </a>
@@ -508,7 +515,7 @@ export default function Home() {
                     setEmailCopied(true);
                     setTimeout(() => setEmailCopied(false), 2000);
                   }}
-                  className="cursor-target rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/20"
+                  className="cursor-target rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-white ring-1 ring-white/20 transition group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20"
                 >
                   <span ref={copyLabelRef} className="t-morph">Copy address</span>
                 </button>
@@ -519,14 +526,19 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               data-cursor-label="Instagram"
-              className="cursor-target group rounded-[2rem] bg-white/5 p-6 ring-1 ring-white/15 transition hover:bg-white/10"
+              className="cursor-target group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-6 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-700 hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60"
             >
-              <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60">
+              {/* Same solid + lime-fill + shine hover as the email
+                  tile: opaque zinc at rest, lime on hover, no fire,
+                  no zoom — the arrow slides diagonally instead. */}
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-lime-300 via-lime-400 to-lime-500 opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+              <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/30 blur-md transition-transform duration-1000 group-hover:translate-x-[400%]" />
+              <p className="relative z-10 flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-white/60 transition-colors duration-700 group-hover:text-black/60">
                 <Instagram size={16} weight="Filled" /> Instagram
               </p>
-              <p className="mt-3 font-pixelify text-lg text-white">@nexu.fx4</p>
-              <p className="mt-5 flex items-center gap-1 text-sm font-semibold text-pink-400">
-                Visit profile <ArrowUpRight size={16} weight="Filled" />
+              <p className="relative z-10 mt-3 font-pixelify text-lg text-white transition-colors duration-700 group-hover:text-black">@nexu.fx4</p>
+              <p className="relative z-10 mt-5 flex items-center gap-1 text-sm font-semibold text-pink-400 transition-colors duration-700 group-hover:text-black">
+                Visit profile <span className="inline-block transition-transform duration-700 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><ArrowUpRight size={16} weight="Filled" /></span>
               </p>
             </a>
           </div>
