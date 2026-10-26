@@ -267,43 +267,49 @@ export default function Home() {
         ref={heroRef}
         id="top"
         style={{ opacity: reduceMotion ? 1 : heroOpacity }}
-        className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
+        className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center text-center"
       >
-        {/* Hero video: NexusFX showreel, user-supplied R2 link.
-            Hotlinked (not copied into the repo). */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-100"
-          src="https://pub-d762446b1f924e5cabe93dad536beb79.r2.dev/Show%20reel%20(1).mp4"
-        />
-        <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/20" />
-        <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
-          <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
-          <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
-          <span className="absolute -bottom-2 -left-2 h-4 w-4 bg-lime-400" />
-          <span className="absolute -bottom-2 -right-2 h-4 w-4 bg-lime-400" />
-          <span className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
-          <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
-          <span className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
-          <span className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
-          <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
-            NEXUSFX
-          </span>
-          <span className="v2-wobble relative inline-block px-2 py-4">
-            <h1 className="v2-soft-blue-title font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
-              NexusFX
-            </h1>
-          </span>
-          <p className="mt-6 font-minecraft text-sm leading-relaxed text-lime-300 sm:text-base">
-            edits that hold attention
+        {/* Hero card, edge to edge: full viewport width, 85vh tall,
+            so the FaultyTerminal background shows above and below
+            it. The showreel video and the title both sit inside
+            this card — title over the video, as the user picked. */}
+        <div className="relative flex h-[85vh] min-h-[560px] w-full flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-zinc-400/30">
+          {/* Hero video: NexusFX showreel, user-supplied R2 link.
+              Hotlinked (not copied into the repo). */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-100"
+            src="https://pub-d762446b1f924e5cabe93dad536beb79.r2.dev/Show%20reel%20(1).mp4"
+          />
+          <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/20" />
+          <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
+            <span className="absolute -left-2 -top-2 h-4 w-4 bg-lime-400" />
+            <span className="absolute -right-2 -top-2 h-4 w-4 bg-lime-400" />
+            <span className="absolute -bottom-2 -left-2 h-4 w-4 bg-lime-400" />
+            <span className="absolute -bottom-2 -right-2 h-4 w-4 bg-lime-400" />
+            <span className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
+            <span className="absolute -bottom-2 left-1/2 h-4 w-4 -translate-x-1/2 bg-lime-400" />
+            <span className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
+            <span className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 bg-lime-400" />
+            <span className="absolute -bottom-5 right-4 rounded-full bg-lime-400 px-3 py-1 font-mono text-[10px] font-bold text-black">
+              NEXUSFX
+            </span>
+            <span className="v2-wobble relative inline-block px-2 py-4">
+              <h1 className="v2-soft-blue-title font-pixelify text-[clamp(4.5rem,18vw,12.5rem)] font-extrabold leading-none tracking-tight">
+                NexusFX
+              </h1>
+            </span>
+            <p className="mt-6 font-minecraft text-sm leading-relaxed text-lime-300 sm:text-base">
+              edits that hold attention
+            </p>
+          </div>
+          <p className="v2-bounce-soft absolute bottom-6 z-10 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
+            scroll ↓
           </p>
         </div>
-        <p className="v2-bounce-soft absolute bottom-6 rounded-full bg-white/10 px-4 py-1 font-mono text-xs text-white/70 backdrop-blur">
-          scroll ↓
-        </p>
       </motion.section>
 
       {/* Clients — contained dark panel, square edge-to-edge tiles */}
