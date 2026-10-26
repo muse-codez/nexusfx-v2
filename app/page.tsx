@@ -265,18 +265,15 @@ export default function Home() {
         style={{ opacity: reduceMotion ? 1 : heroOpacity }}
         className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center"
       >
-        {/* TEMPORARY placeholder only, REMOVE BEFORE PUBLISHING:
-            this video is notenemyok.com's asset, not NexusFX's.
-            It is hotlinked (not copied into the repo) for preview
-            only, as the user asked, and must be replaced with
-            NexusFX's own hero video before any publish. */}
+        {/* Hero video: NexusFX showreel, user-supplied R2 link.
+            Hotlinked (not copied into the repo). */}
         <video
           autoPlay
           muted
           loop
           playsInline
           className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-100"
-          src="https://www.notenemyok.com/VIDS/background%20video.mp4"
+          src="https://pub-d762446b1f924e5cabe93dad536beb79.r2.dev/Show%20reel%20(1).mp4"
         />
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] bg-black/20" />
         <div className="group v2-fade-up relative z-10 -rotate-2 border-2 border-lime-400/60 px-6 py-8 sm:px-10">
