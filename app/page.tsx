@@ -478,16 +478,18 @@ export default function Home() {
             style={{ fontFamily: "var(--font-pixelify), monospace" }}
           />
         </div>
-        <div className="mx-auto max-w-5xl px-4 text-center">
-          {/* Contact, redesigned with the frontend-design +
-              interaction-design skills: no longer two identical
-              SaaS-style cards. Email is the primary action, so it
-              is wider; Instagram is secondary and narrower, with
-              its own pink hover (the site's second accent) instead
-              of a copy of the lime one. Labels are sentence case,
-              not tracked-out all-caps. */}
-          <div className="mt-10 grid gap-6 text-left sm:grid-cols-5">
-            <div className="group relative overflow-hidden rounded-[2.5rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60 sm:col-span-3">
+        <div className="mx-auto max-w-5xl px-4">
+          {/* Hire panel, inspired by the researched portfolios
+              (Felix-style simple contact structure, Tanner-style
+              bold primary CTA, Matheus-style email + social
+              buttons), in original code: one framed matte-metal
+              panel holding the two contact tiles, so hire reads
+              as one section instead of floating tiles. No site's
+              layout or wording copied; no new copy added. */}
+          <div className="relative mt-10 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-6 shadow-2xl ring-1 ring-zinc-400/30 sm:p-8">
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+            <div className="relative grid gap-6 text-left sm:grid-cols-5">
+            <div className="group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60 sm:col-span-3">
               {/* Primary tile: solid zinc at rest, lime fill on
                   hover (no fire, no zoom) with a shine sweep, and
                   text/buttons flip to dark for readability. */}
@@ -501,7 +503,7 @@ export default function Home() {
                 <a
                   href="mailto:nexusfx.media@gmail.com"
                   data-cursor-label="Email"
-                  className="cursor-target rounded-full bg-lime-400 px-5 py-2 text-sm font-bold text-black transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black group-hover:text-lime-400"
+                  className="cursor-target rounded-full bg-lime-400 px-6 py-3 text-base font-bold text-black transition duration-150 active:translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 group-hover:bg-black group-hover:text-lime-400"
                 >
                   Write an email
                 </a>
@@ -524,7 +526,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               data-cursor-label="Instagram"
-              className="cursor-target group relative overflow-hidden rounded-[2.5rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(247,7,142,0.35)] hover:ring-pink-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 sm:col-span-2"
+              className="cursor-target group relative overflow-hidden rounded-[2rem] bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(247,7,142,0.35)] hover:ring-pink-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 sm:col-span-2"
             >
               {/* Secondary tile: same solid + fill + shine language
                   as email, but pink (not a lime copy), no fire, no
@@ -535,10 +537,11 @@ export default function Home() {
                 <Instagram size={16} weight="Filled" /> Instagram
               </p>
               <p className="relative z-10 mt-3 font-pixelify text-xl text-white transition-colors duration-500 motion-reduce:transition-none group-hover:text-black">@nexu.fx4</p>
-              <p className="relative z-10 mt-6 flex items-center gap-1 text-sm font-semibold text-pink-400 transition-colors duration-500 motion-reduce:transition-none group-hover:text-black">
+              <span className="relative z-10 mt-6 inline-flex items-center gap-1 rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-pink-400 ring-1 ring-white/20 transition duration-150 group-hover:bg-black/10 group-hover:text-black group-hover:ring-black/20">
                 Visit profile <span className="inline-block transition-transform duration-300 motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><ArrowUpRight size={16} weight="Filled" /></span>
-              </p>
+              </span>
             </a>
+            </div>
           </div>
         </div>
       </section>
