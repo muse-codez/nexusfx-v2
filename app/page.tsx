@@ -327,7 +327,6 @@ export default function Home() {
       <section id="clients" className="relative z-20 w-full px-2 pb-24 sm:px-4">
         <motion.div style={{ y: reduceMotion ? 0 : cardY }} className="v2-pixel-corners relative w-full overflow-hidden bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-8 shadow-2xl border border-zinc-400/30 sm:p-12">
           <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
-          <span aria-hidden="true" className="v2-pixel-grid pointer-events-none absolute inset-0" />
           <span aria-hidden="true" className="v2-pixel-strip absolute inset-x-0 top-0 h-[6px]" />
           <span aria-hidden="true" className="absolute left-4 top-3 text-sm text-white/30">✦</span>
           <span aria-hidden="true" className="absolute right-4 top-3 text-sm text-white/30">✦</span>
@@ -517,8 +516,7 @@ export default function Home() {
               layout or wording copied; no new copy added. */}
           <div className="v2-pixel-corners relative mt-10 overflow-hidden bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 p-6 shadow-2xl border border-zinc-400/30 sm:p-8">
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
-            <span aria-hidden="true" className="v2-pixel-grid pointer-events-none absolute inset-0" />
-            <span aria-hidden="true" className="v2-pixel-strip absolute inset-x-0 top-0 h-[6px]" />
+              <span aria-hidden="true" className="v2-pixel-strip absolute inset-x-0 top-0 h-[6px]" />
             <div className="relative grid gap-6 text-left sm:grid-cols-5">
             <div className="group relative overflow-hidden bg-zinc-900 p-8 shadow-xl ring-1 ring-zinc-700 transition-shadow duration-500 motion-reduce:transition-none hover:shadow-[0_0_40px_rgba(163,230,53,0.35)] hover:ring-lime-400/60 sm:col-span-3">
               {/* Primary tile: solid zinc at rest, lime fill on
