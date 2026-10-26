@@ -349,7 +349,7 @@ export default function Home() {
                   onMouseEnter={() => setFeaturedClient(index)}
                   onFocus={() => setFeaturedClient(index)}
                   onBlur={() => setFeaturedClient(null)}
-                  className={`cursor-target relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 ${
+                  className={`cursor-target relative aspect-square overflow-hidden rounded-[2.5rem] bg-zinc-900 shadow-lg ring-1 ring-zinc-300/40 transition-shadow duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 ${
                     featured
                       ? "z-10 ring-2 ring-lime-400/80 shadow-[0_0_28px_rgba(163,230,53,0.35)]"
                       : ""
@@ -373,15 +373,33 @@ export default function Home() {
                   {featured && (
                     <span aria-hidden="true" className="v2-tile-scan pointer-events-none absolute inset-x-0 h-[2px] bg-lime-400 shadow-[0_0_12px_rgba(163,230,53,0.9)]" />
                   )}
+                  {/* Rest name: always readable, so the grid reads as
+                      creators at a glance instead of just logos —
+                      a Pixelify name with a lime dot over a soft
+                      gradient. It fades out as the hover info
+                      wipes in, so the two never stack. */}
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 block bg-gradient-to-t from-black/90 via-black/50 to-transparent px-3 pb-2.5 pt-6 text-left transition-opacity duration-300 ${
+                      featured ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    <span className="flex items-center gap-1.5 font-pixelify text-sm text-white">
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime-400" />
+                      {client.name}
+                    </span>
+                  </span>
                   {/* Hover info: revealed by a left-to-right wipe, not a
-                      slide/fade — name gets a short glitch flicker */}
+                      slide/fade — name gets a short glitch flicker.
+                      Name now matches the rest strip (Pixelify) and
+                      subs are mono, for a HUD-style info panel. */}
                   <span
                     className="v2-wipe absolute inset-x-0 bottom-0 block bg-gradient-to-t from-black/95 via-black/70 to-transparent px-3 pb-3 pt-8 text-left"
                     style={{ clipPath: featured ? "inset(0 0 0 0)" : "inset(0 100% 0 0)" }}
                   >
-                    <span className={`block text-sm font-bold text-white ${featured ? "v2-glitch" : ""}`}>{client.name}</span>
+                    <span className={`block font-pixelify text-sm text-white ${featured ? "v2-glitch" : ""}`}>{client.name}</span>
                     <span className="mt-0.5 block text-xs leading-snug text-white/80">{client.desc}</span>
-                    <span className="mt-1 block text-xs font-semibold text-lime-300">{client.subs}</span>
+                    <span className="mt-1 block font-mono text-[11px] font-semibold text-lime-300">{client.subs}</span>
                   </span>
                 </a>
               );
