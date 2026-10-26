@@ -221,16 +221,40 @@ body {
   animation: v2-nav-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Pixel design: stepped 12px corners for the large cards and the
-   scrolled navbar — square, but with an 8-bit step instead of a
-   plain sharp corner. Smaller elements are plain sharp squares. */
+/* Pixel design, corrected: pixels are MANY small squares, like
+   the boxes a pixel font is built from — not one big square
+   box. So corners are a staircase of 4px steps (3 small squares
+   per corner), cards carry a texture of tiny 4px squares, and
+   strips are rows of alternating 6px squares. */
 .v2-pixel-corners {
   clip-path: polygon(
-    0 12px, 12px 12px, 12px 0,
-    calc(100% - 12px) 0, calc(100% - 12px) 12px, 100% 12px,
-    100% calc(100% - 12px), calc(100% - 12px) calc(100% - 12px),
-    calc(100% - 12px) 100%, 12px 100%,
-    12px calc(100% - 12px), 0 calc(100% - 12px)
+    0 12px, 4px 12px, 4px 8px, 8px 8px, 8px 4px, 12px 4px, 12px 0,
+    calc(100% - 12px) 0, calc(100% - 12px) 4px, calc(100% - 8px) 4px,
+    calc(100% - 8px) 8px, calc(100% - 4px) 8px, calc(100% - 4px) 12px, 100% 12px,
+    100% calc(100% - 12px), calc(100% - 4px) calc(100% - 12px),
+    calc(100% - 4px) calc(100% - 8px), calc(100% - 8px) calc(100% - 8px),
+    calc(100% - 8px) calc(100% - 4px), calc(100% - 12px) calc(100% - 4px),
+    calc(100% - 12px) 100%, 12px 100%, 12px calc(100% - 4px),
+    8px calc(100% - 4px), 8px calc(100% - 8px), 4px calc(100% - 8px),
+    4px calc(100% - 12px), 0 calc(100% - 12px)
+  );
+}
+
+/* Tiny-square texture: one 4px square in every 16px tile, tiled
+   across the whole element — hundreds of small pixels, like a
+   pixel font's boxes, at low opacity so text stays readable. */
+.v2-pixel-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect width='4' height='4' fill='rgba(255,255,255,0.14)'/%3E%3C/svg%3E");
+  background-size: 16px 16px;
+}
+
+/* Pixel strip: a row of alternating 6px lime / pink squares
+   with 6px gaps — many small pixels in a line, not a solid bar. */
+.v2-pixel-strip {
+  background-image: repeating-linear-gradient(
+    to right,
+    #a3e635 0 6px, transparent 6px 12px,
+    #f7078e 12px 18px, transparent 18px 24px
   );
 }
 
